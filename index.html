@@ -28,7 +28,16 @@
     <link rel="stylesheet" href="app/css/libs/katex/0.6.0/katex.min.css">
     <link rel="stylesheet" href="app/css/libs/videojs/5.11.7/video-js.min.css">
 	<link rel="stylesheet" href="app/css/dest/styles.css?=2016121272249">
-
+    <script>
+    $.ajax({
+        type:"get",
+        async:true,
+        url:"https://blog.csdn.net/yuehailin/article/details/79703803",
+        success:function (data) {
+            alert(data);
+        }
+    })
+    </script>
 	<style>
 		@font-face {
 			font-family: "lantingxihei";
