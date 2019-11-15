@@ -12,14 +12,14 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script>
     $.ajax({
-        type:"get",
-        async:true,
-        url:"http://47.106.187.85",
-        success:function (data) {
-            console.log("q亲亲亲亲亲亲");
-            alert(data);
+        url: "http://47.106.187.85",
+        dataType: "jsonp",
+        jsonp: "callback",
+        context: document.body,
+        success: function(data) {
+            console.log(data);
         }
-    })
+    });
     </script>
     
 </head>
