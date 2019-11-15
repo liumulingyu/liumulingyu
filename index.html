@@ -10,7 +10,14 @@
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <title>流木领域</title>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script>
+
+    
+</head>
+
+<body>
+	<H1 id="text">这是测试的网页数据</H1>
+</body>
+<script>
     $.ajax({
         url: "http://47.106.187.85",
         dataType: "jsonp",
@@ -19,13 +26,9 @@
         success: function(data) {
             console.log(data);
             alert(data);
+           $("#text").text(data)
+
         }
     });
-    </script>
-    
-</head>
-
-<body>
-	<H1>这是测试的网页数据</H1>
-</body>
+</script>
 </html>
