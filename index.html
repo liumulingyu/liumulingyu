@@ -1,31 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="author" content="Lei Shi">
-  <meta http-equiv="Cache-Control" content="o-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <title>流木领域</title>
-  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Lei Shi">
+    <meta http-equiv="Cache-Control" content="o-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>流木领域</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
 </head>
 
 <body>
-	<H1 id="text">这是测试的网页数据</H1>
+<H1 id="text">这是测试的网页数据</H1>
 </body>
-<script>
-    $.ajax({
-        url: "http://47.106.187.85",
-        dataType: "text",
-        context: document.body,
-        success: function(data) {
-            console.log(data);
-           $("#text").text(data)
 
-        }
-    });
-</script>
 </html>
