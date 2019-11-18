@@ -1,19 +1,743 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Lei Shi">
-    <meta http-equiv="Cache-Control" content="o-transform">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
     <title>流木领域</title>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-
+    <link rel='stylesheet' id='poi-player-css' href='static/css/poi-2.0.5.css' type='text/css' media='all'>
+    <link rel='stylesheet' id='caozhuti-style-css' href='static/css/style-4.9.css' type='text/css' media='all'>
+    <link rel='stylesheet' id='external-css' href='static/css/external-4.9.css' type='text/css' media='all'>
+    <link rel='stylesheet' id='sweetalert2-css' href='static/css/sweetalert2.min-4.9.css' type='text/css' media='all'>
+    <link rel='stylesheet' id='app-css' href='static/css/app-4.9.css' type='text/css' media='all'>
+    <link rel='stylesheet' id='diy-css' href='static/css/diy-4.9.css' type='text/css' media='all'>
+    <script type='text/javascript' src='static/js/jquery-2.2.4.min-2.2.4.js'></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.js"></script>
+    <script src="static/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body>
+<body class="archive category category-work category-93  hfeed navbar-sticky_transparent navbar-slide sidebar-none pagination-infinite_button">
+<div class="site">
+    <!--头部-->
+    <header class="site-header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-wrapper">
+                    <a href="index.html">
+                        <img class="logo regular tap-logo" src="static/picture/logo.png" data-dark="" alt="流木领域">
+                    </a>
+                </div>
+                <div class="sep"></div>
+                <nav class="main-menu hidden-xs hidden-sm hidden-md">
+                    <ul id="menu-menu-1" class="nav-list u-plain-list">
+                        <li id="menu-item-34"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-34">
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li id="menu-item-234"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-234"><a
+                                href="javascript:;">杂货铺</a></li>
+                        <li id="menu-item-146"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category current-category-ancestor current-menu-ancestor current-menu-parent current-category-parent menu-item-has-children menu-item-146">
+                            <a href="tool.html">软件工具</a>
+                            <ul class="sub-menu">
+                                <li id="menu-item-147"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-147">
+                                    <a href="">办公文档</a></li>
+                                <li id="menu-item-148"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-148"><a
+                                        href="ide.html">开发IDE</a></li>
+                                <li id="menu-item-149"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-149"><a
+                                        href="camera.html">摄影工具</a></li>
+                                <li id="menu-item-150"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-150"><a
+                                        href="show.html">翻墙通道</a></li>
+                                <li id="menu-item-151"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-151"><a
+                                        href="des.html">设计神器</a></li>
+                            </ul>
+                        </li>
+                        <li id="menu-item-101"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-101">
+                            <a href="index1.html">工作室</a></li>
+                        <li id="menu-item-102"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-102">
+                            <a href="tech-2.html">技术栈</a>
+                            <ul class="sub-menu">
+                                <li id="menu-item-105"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-105"><a
+                                        href="design.html">我爱设计</a></li>
+                                <li id="menu-item-103"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-103"><a
+                                        href="qdkf.html">前端开发</a></li>
+                                <li id="menu-item-104"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-104"><a
+                                        href="htcx.html">后台程序</a></li>
+                                <li id="menu-item-107"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-107"><a
+                                        href="databases.html">玩数据库</a></li>
+                                <li id="menu-item-106"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-106"><a
+                                        href="server.html">操服务器</a></li>
+                            </ul>
+                        </li>
+                        <li id="menu-item-108"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-108">
+                            <a href="index1.html">小程序</a></li>
+                        <li id="menu-item-109"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-109">
+                            <a href="zmz.html">造梦者</a>
+                            <ul class="sub-menu">
+                                <li id="menu-item-115"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-115"><a
+                                        href="time.html">时间轴</a></li>
+                                <li id="menu-item-223"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-223"><a
+                                        href="index2.html">音悦台</a></li>
+                                <li id="menu-item-113"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113"><a
+                                        href="navb.html">我的导航</a></li>
+                                <li id="menu-item-236"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-236"><a
+                                        href="index3.html">会员电影</a></li>
+                                <li id="menu-item-114"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-114"><a
+                                        href="apple.html">我的果园</a></li>
+                                <li id="menu-item-111"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-111"><a
+                                        href="fuck.html">关注我们</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="main-search">
+                    <form method="get" class="search-form inline" action="https://ww.aliwen.vip/">
+                        <input type="search" class="search-field inline-field" placeholder="输入关键词，回车..."
+                               autocomplete="off" value="" name="s" required="required">
+                        <button type="submit" class="search-submit"><i class="mdi mdi-magnify"></i></button>
+                    </form>
+                    <div class="search-close navbar-button"><i class="mdi mdi-close"></i></div>
+                </div>
+                <div class="actions">
+                    <!-- user -->
+                    <div class="login-btn navbar-button"><i class="mdi mdi-account"></i> 登录</div>
+                    <!-- user end -->
+                    <div class="search-open navbar-button"><i class="mdi mdi-magnify"></i></div>
+                    <div class="tap-dark navbar-button"><i class="mdi mdi-brightness-4"></i></div>
+                    <div class="burger"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="header-gap"></div>
+    <!--分类-->
+    <div class="term-bar lazyload visible"
+         data-bg="https://ww.aliwen.vip/wp-content/uploads/2019/10/35bac3d2cdc2258.jpg">
+        <h1 class="term-title">分类：办公文档</h1></div>
+    <!--内容部分-->
+    <div class="site-content">
 
+
+        <div class="container">
+            <div class="filter--content">
+                <form class="mb-0" method="get" action="https://ww.aliwen.vip">
+                    <input type="hidden" name="s">
+                    <div class="form-box search-properties mb-0">
+                        <!-- 一级分类 -->
+                        <div class="filter-item">
+                            <ul class="filter-tag"><span><i class="fa fa-folder-open-o"></i> 分类：</span>
+                                <li><a href="zpxs.html" class="">作品欣赏</a></li>
+                                <li><a href="study.html" class="">学习</a></li>
+                                <li><a href="tech.html" class="">技术</a></li>
+                                <li><a href="tech-2.html" class="">技术分享</a></li>
+                                <li><a href="life.html" class="">生活</a></li>
+                                <li><a href="sygs.html" class="">诗与故事</a></li>
+                                <li><a href="tool.html" class="">软件工具</a></li>
+                                <li><a href="okl.html" class="">随笔</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 相关标签 -->
+                        <div class="filter-item">
+                            <ul class="filter-tag"><span><i class="fa fa-tags"></i> 标签：</span>
+                                <li><a href="office.html">office</a></li>
+                                <li><a href="下载.html">下载</a></li>
+                                <li><a href="办公.html">办公</a></li>
+                                <li><a href="加速器.html">加速器</a></li>
+                                <li><a href="录屏.html">录屏</a></li>
+                                <li><a href="总结ppt.html">总结PPT</a></li>
+                                <li><a href="极简ppt.html">极简PPT</a></li>
+                                <li><a href="汇报ppt.html">汇报PPT</a></li>
+                                <li><a href="清新ppt.html">清新PPT</a></li>
+                                <li><a href="百度云.html">百度云</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 快速筛选 -->
+                        <div class="filter-item">
+                            <ul class="filter-tag"><span><i class="fa fa-filter"></i> 价格：</span>
+                                <li><a href="work-1.html" class="">免费</a></li>
+                                <li><a href="work-2.html" class="">付费</a></li>
+                                <li><a href="work-3.html" class="">VIP免费</a></li>
+                                <li><a href="work-4.html" class="">VIP优惠</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 排序 -->
+                        <div class="filter-item">
+                            <ul class="filter-tag"><span><i class="fa fa-sort-alpha-desc"></i> 排序：</span>
+                                <li><a href="work-date.html" class="on">发布日期</a></li>
+                                <li><a href="work-id.html" class="">ID</a></li>
+                                <li><a href="work-title.html" class="">标题</a></li>
+                                <li><a href="work-modified.html" class="">修改时间</a></li>
+                                <li><a href="work-comment_count.html" class="">评论数量</a></li>
+                                <li><a href="work-rand.html" class="">随机</a></li>
+                            </ul>
+                        </div>
+
+
+                        <!-- .row end -->
+                    </div>
+                    <!-- .form-box end -->
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="content-area">
+                        <main class="site-main">
+                            <div class="row posts-wrapper">
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-450"
+                                             class="post post-grid post-450 type-post status-publish format-standard has-post-thumbnail hentry category-work category-tool tag-121 tag-118 tag-117 tag-110">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="450.html">
+                                                    <img class="lazyload" data-src="static/picture/35bac3d2cdc2258.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="450.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                          <a href="tool.html" rel="category">
+                  <i class="dot"></i>软件工具              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="450.html" rel="bookmark">Pandownload倒下了，没事，还有它，又一款百度云下载神器，速度可达10M/s</a>
+                                                </h2></header>
+                                            <div class="entry-excerpt u-text-format">Pandownload软件关停公告
+                                                很多小伙伴在说，最近这段时间，使用Pando...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="450.html">
+                                                    <time datetime="2019-10-31T09:24:15+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年10月31日
+                                                    </time>
+                                                </a>
+                                                <a href="450.html"><span><i class="fa fa-eye"></i> 81</span></a>
+                                                <a href="450.html"><span><i class="fa fa-comments-o"></i> 2</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-400"
+                                             class="post post-grid post-400 type-post status-publish format-standard has-post-thumbnail hentry category-work category-camera category-tool tag-123 tag-122 tag-110">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="400.html">
+                                                    <img class="lazyload" data-src="static/picture/5d518828ff221e1.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="400.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                          <a href="camera.html" rel="category">
+                  <i class="dot"></i>摄影工具              </a>
+                          <a href="tool.html" rel="category">
+                  <i class="dot"></i>软件工具              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="400.html" rel="bookmark">Bandicam
+                                                    破解高清录屏软件-超超超实用的电脑屏幕录像软件。</a></h2></header>
+                                            <div class="entry-excerpt u-text-format">Bandicam(班迪录屏)
+                                                Bandicam是一款由韩国开发的高清视频录制工具...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="400.html">
+                                                    <time datetime="2019-10-15T13:48:18+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年10月15日
+                                                    </time>
+                                                </a>
+                                                <a href="400.html"><span><i class="fa fa-eye"></i> 107</span></a>
+                                                <a href="400.html"><span><i class="fa fa-comments-o"></i> 0</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-369"
+                                             class="post post-grid post-369 type-post status-publish format-standard has-post-thumbnail hentry category-work tag-121 tag-109">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="369.html">
+                                                    <img class="lazyload" data-src="static/picture/2e54cdc0dbc96b9.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="369.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="369.html" rel="bookmark">冰点文库-全网VIP文档下载神器-包含百度文库、豆丁等文档下载</a>
+                                                </h2></header>
+                                            <div class="entry-excerpt u-text-format">
+                                                冰点文库是一款网络分享文档的下载工具。用户使用冰点文库无需积分就可以自由下载，本...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="369.html">
+                                                    <time datetime="2019-10-09T11:43:23+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年10月9日
+                                                    </time>
+                                                </a>
+                                                <a href="369.html"><span><i class="fa fa-eye"></i> 87</span></a>
+                                                <a href="369.html"><span><i class="fa fa-comments-o"></i> 0</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-294"
+                                             class="post post-grid post-294 type-post status-publish format-standard has-post-thumbnail hentry category-work tag-118 tag-117">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="294.html">
+                                                    <img class="lazyload" data-src="static/picture/428a451038ee5b2.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="294.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="294.html" rel="bookmark">百度网盘 |
+                                                    下载提速神器，你想要吗？支持Win / Mac系统</a></h2></header>
+                                            <div class="entry-excerpt u-text-format">
+                                                百度网盘是一款我们平常分享大文件时常用的工具，分享传输非常方便，但是我们在下载的...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="294.html">
+                                                    <time datetime="2019-09-16T16:57:02+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年9月16日
+                                                    </time>
+                                                </a>
+                                                <a href="294.html"><span><i class="fa fa-eye"></i> 181</span></a>
+                                                <a href="294.html"><span><i class="fa fa-comments-o"></i> 0</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-275"
+                                             class="post post-grid post-275 type-post status-publish format-standard has-post-thumbnail hentry category-work category-study category-tool tag-office tag-109 tag-110">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="275.html">
+                                                    <img class="lazyload" data-src="static/picture/dc5c7986daef50c.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="275.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                          <a href="study.html" rel="category">
+                  <i class="dot"></i>学习              </a>
+                          <a href="tool.html" rel="category">
+                  <i class="dot"></i>软件工具              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="275.html" rel="bookmark">强大的Office
+                                                    你get到了吗？</a></h2></header>
+                                            <div class="entry-excerpt u-text-format">推出office2013 | 2016
+                                                版本的安装教程，里面附有永久激活工具，需...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="275.html">
+                                                    <time datetime="2019-09-06T17:25:16+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年9月6日
+                                                    </time>
+                                                </a>
+                                                <a href="275.html"><span><i class="fa fa-eye"></i> 123</span></a>
+                                                <a href="275.html"><span><i class="fa fa-comments-o"></i> 0</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <article id="post-159"
+                                             class="post post-grid post-159 type-post status-publish format-standard has-post-thumbnail hentry category-work tag-ppt">
+                                        <div class="entry-media">
+                                            <div class="placeholder" style="padding-bottom: 66.666666666667%;">
+                                                <a href="159.html">
+                                                    <img class="lazyload" data-src="static/picture/ea603c3c2c681cc.jpg"
+                                                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-wrapper">
+                                            <a class="grid_author_avt" href="159.html">
+                                                <div class="grid_author_bggo avatar bg-cover"
+                                                     style="background-image: url(static/image/1.png);"></div>
+                                            </a>
+
+                                            <header class="entry-header">
+                                                <div class="entry-meta">
+                  <span class="meta-category">
+                          <a href="" rel="category">
+                  <i class="dot"></i>办公文档              </a>
+                      </span>
+                                                </div>
+
+                                                <h2 class="entry-title"><a href="159.html" rel="bookmark">淡绿极简小清新总结汇报PPT模板</a>
+                                                </h2></header>
+                                            <div class="entry-excerpt u-text-format">淡绿极简小清新总结汇报PPT模板
+                                                一个非常简洁，小清新，极简的工作汇报PPT模板...
+                                            </div>
+                                            <div class="entry-footer">
+                                                <a href="159.html">
+                                                    <time datetime="2019-07-27T17:20:32+08:00"><i
+                                                            class="fa fa-clock-o"></i> 2019年7月27日
+                                                    </time>
+                                                </a>
+                                                <a href="159.html"><span><i class="fa fa-eye"></i> 159</span></a>
+                                                <a href="159.html"><span><i class="fa fa-comments-o"></i> 0</span></a>
+                                                <a href="159.html"><span style="color: #fd721f"><i
+                                                        class="fa fa-paypal"></i> 1</span></a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <div class="infinite-scroll-status">
+                                <div class="infinite-scroll-request"></div>
+                            </div>
+                            <div class="infinite-scroll-action">
+                                <div class="infinite-scroll-button button">加载更多</div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end sitecoent -->
+
+    <!--底部内容-->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-widget">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 widget--about">
+                        <div class="widget--content">
+                            <div class="footer--logo mb-20">
+                                <img class="tap-logo" src="static/picture/logo.png" data-dark="" alt="流木领域">
+                            </div>
+                            <p class="mb-10">
+                                活着不只有眼前的苟且，还有诗和远方，以爱与青春为名，陪你一路成长，不失初心，不忘初衷!</p>
+                        </div>
+                    </div>
+                    <!-- .col-md-2 end -->
+                    <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-1 widget--links">
+                        <div class="widget--title">
+                            <h5>本站导航</h5>
+                        </div>
+                        <div class="widget--content">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#">关于我们</a></li>
+                                <li><a href="#">充值说明</a></li>
+                                <li><a href="#">下载说明</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- .col-md-2 end -->
+                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                        <div class="widget--title">
+                            <h5>更多介绍</h5>
+                        </div>
+                        <div class="widget--content">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#">隐私协议</a></li>
+                                <li><a href="#">权限说明</a></li>
+                                <li><a href="#">账户中心</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- .col-md-2 end -->
+                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                        <div class="widget--title">
+                            <h5 style='text-align:center'>微信公众号</h5>
+                        </div>
+                        <div class="widget--content">
+                            <img src="static/picture/wechat_qcode.jpg">
+                        </div>
+                    </div>
+
+                    <!-- .col-md-2 end -->
+                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                        <div class="widget--title">
+                            <h5 style='text-align:center'>个人微信</h5>
+                        </div>
+                        <div class="widget--content">
+                            <img src="static/picture/user_wechat_qcode.jpg">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="site-info">
+                © 流木领域 www.16ds.net
+            </div>
+        </div>
+    </footer>
+    <!--暂时不知道是干嘛的-->
+    <div class="rollbar">
+        <div class="rollbar-item" etap="to_top"><i class="fa fa-angle-up"></i></div>
+    </div>
+    <div class="dimmer"></div>
+    <!--登陆注册-->
+    <div id="popup-signup" class="popup-signup fade" style="display: none;">
+        <div class="register-login-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#login" data-toggle="login">登录</a>
+                        </li>
+                        <li><a href="#signup" data-toggle="signup">注册</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="login">
+                            <div class="signup-form-container text-center">
+                                <form class="mb-0">
+                                    <div class="open-oauth  text-center"><a href="qq.html" class="btn btn-qq"><i
+                                            class="fa fa-qq"></i></a><a href="weixin.html" class="btn btn-weixin"><i
+                                            class="fa fa-weixin"></i></a><a href="weibo.html" class="btn btn-weibo"><i
+                                            class="fa fa-weibo"></i></a></div>
+                                    <div class="or-text"><span>or</span></div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="username" placeholder="*用户名或邮箱">
+                                    </div>
+                                    <!-- .form-group end -->
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" placeholder="*密码">
+                                    </div>
+                                    <button type="button" class="go-login btn btn--primary btn--block">登录</button>
+                                    <a href="#" class="forget-password">忘记密码?</a>
+                                </form>
+                                <!-- form  end -->
+                            </div>
+                            <!-- .signup-form end -->
+                        </div>
+                        <div class="tab-pane fade in" id="signup">
+                            <form class="mb-0">
+                                <div class="open-oauth  text-center"><a href="qq.html" class="btn btn-qq"><i
+                                        class="fa fa-qq"></i></a><a href="weixin.html" class="btn btn-weixin"><i
+                                        class="fa fa-weixin"></i></a><a href="weibo.html" class="btn btn-weibo"><i
+                                        class="fa fa-weibo"></i></a></div>
+                                <div class="or-text"><span>or</span></div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="user_name" placeholder="输入英文用户名">
+                                </div>
+                                <!-- .form-group end -->
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="user_email" placeholder="绑定邮箱">
+                                </div>
+                                <!-- .form-group end -->
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="user_pass" placeholder="密码最小长度为6">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="user_pass2" placeholder="再次输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="captcha" placeholder="邮箱验证码">
+                                        <span class="input-group-btn">
+                                            <button class="go-captcha_email btn btn--secondary"
+                                                    type="button">发送验证码</button>
+                                          </span>
+                                    </div>
+                                </div>
+                                <button type="button" class="go-register btn btn--primary btn--block">立即注册</button>
+
+                            </form>
+                            <!-- form  end -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <!--侧边栏-->
+    <div class="off-canvas">
+        <div class="canvas-close"><i class="mdi mdi-close"></i></div>
+        <div class="logo-wrapper">
+            <a href="index.html">
+                <img class="logo regular" src="static/picture/logo.png" alt="流木领域">
+            </a>
+        </div>
+        <div class="mobile-menu hidden-lg hidden-xl"></div>
+        <aside class="widget-area">
+        </aside>
+    </div>
+    <script type='text/javascript' src='static/js/poi.min-2.0.5.js'></script>
+    <script type='text/javascript' src='static/js/sweetalert2.min-4.9.js'></script>
+    <script type='text/javascript' src='static/js/plugins-4.9.js'></script>
+    <script type='text/javascript' src='static/js/app-4.9.js'></script>
+    <link rel="stylesheet" type="text/css" rel="external nofollow" target="_blank" href="static/css/sweetalert.min.css">
+    <script src="static/js/sweetalert.min.js"></script>
+    <script>document.body.oncopy = function () {
+        swal("复制成功！", "转载请务必保留原文链接，申明来源，谢谢合作！！", "success");
+    };</script>
+    <script>
+        !function (e, t, a) {
+            function r() {
+                for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+                requestAnimationFrame(r)
+            }
+
+            function n() {
+                var t = "function" == typeof e.onclick && e.onclick;
+                e.onclick = function (e) {
+                    t && t(),
+                        o(e)
+                }
+            }
+
+            function o(e) {
+                var a = t.createElement("div");
+                a.className = "heart",
+                    s.push({
+                        el: a,
+                        x: e.clientX - 5,
+                        y: e.clientY - 5,
+                        scale: 1,
+                        alpha: 1,
+                        color: c()
+                    }),
+                    t.body.appendChild(a)
+            }
+
+            function i(e) {
+                var a = t.createElement("style");
+                a.type = "text/css";
+                try {
+                    a.appendChild(t.createTextNode(e))
+                } catch (t) {
+                    a.styleSheet.cssText = e
+                }
+                t.getElementsByTagName("head")[0].appendChild(a)
+            }
+
+            function c() {
+                return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+            }
+
+            var s = [];
+            e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame ||
+                function (e) {
+                    setTimeout(e, 1e3 / 60)
+                },
+                i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),
+                n(),
+                r()
+        }(window, document);
+    </script>
+
+</div>
 </body>
-
 </html>
