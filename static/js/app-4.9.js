@@ -21,7 +21,6 @@ jQuery(function() {
   search();
   pagination();
   sidebar();
-  fancybox();
   userinit();
   signup_popup();
   share_pop();
@@ -79,11 +78,16 @@ function open_signup_popup(){
 
 function signup_popup(){
   'use strict';
-  
-
+/*登陆按钮*/
   $(".login-btn").on("click", function(event) {
-      event.preventDefault();
-      open_signup_popup()
+      var token=sessionStorage.getItem("token")
+      if(token==null){
+          event.preventDefault();
+          open_signup_popup()
+      }else{
+          /*进入个人中心*/
+          self.location="user.html"
+      }
   });
 
   $(".must-log-in a").on("click", function(event) {
@@ -1287,17 +1291,6 @@ function sidebar() {
 
 }
 
-function fancybox() {
-  'use strict';
-  $(function() {
-    if (caozhuti.is_singular == 0) {return false;}
-    $('.entry-content a[href*=".jpg"],.entry-content a[href*=".jpeg"],.entry-content a[href*=".png"],.entry-content a[href*=".gif"]').each(function() {
-        if ($(this).parents('a').length == 0) {
-            $(this).attr("data-fancybox","images")
-        }
-    });
-  });
-}
 
 function dimmer(action, speed) {
   'use strict';

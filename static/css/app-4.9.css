@@ -476,7 +476,7 @@ template {
         flex: 0 0 16.666667%;
         max-width: 16.666667%;
     }
-
+    /*排列个数*/
     .col-lg-3,.navbar .menu-item-mega>.sub-menu>.menu-item {
         flex: 0 0 25%;
         max-width: 25%;
@@ -2991,6 +2991,7 @@ table tbody tr td,table tbody tr td {
     background-color: #ffffff;
     height: 0;
     overflow: hidden;
+    padding-bottom: 100%;
     /* border-radius: 4px 4px 0 0; */
 }
 
