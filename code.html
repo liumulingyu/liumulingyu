@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <title>微信俱乐部</title>
+    <title>源码大全</title>
     <link rel='stylesheet' id='caozhuti-style-css' href='static/css/style-4.9.css' type='text/css' media='all'>
     <link rel='stylesheet' id='external-css' href='static/css/external-4.9.css' type='text/css' media='all'>
     <link rel='stylesheet' id='sweetalert2-css' href='static/css/sweetalert2.min-4.9.css' type='text/css' media='all'>
@@ -39,8 +39,17 @@
                         </li>
                         <li id="menu-item-101"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-101">
-                            <a href="code.html">源码大全</a></li>
+                            <a href="index1.html">源码大全</a></li>
+                        <li id="menu-item-146"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category current-category-ancestor current-menu-ancestor current-menu-parent current-category-parent menu-item-has-children menu-item-146">
+                            <a href="tool.html">软件工具</a>
+                            <ul class="sub-menu">
+                                <li id="menu-item-148"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-148"><a
+                                        href="ide.html">开发IDE</a></li>
 
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <div class="main-search">
@@ -52,8 +61,6 @@
                     <div class="search-close navbar-button"><i class="mdi mdi-close"></i></div>
                 </div>
                 <div class="actions">
-                    <!--发布-->
-                    <div class="release-btn navbar-button"><i class="mdi mdi-account"></i>发布</div>
                     <!-- user -->
                     <div class="login-btn navbar-button"><i class="mdi mdi-account"></i>登录</div>
                     <!-- user end -->
@@ -80,11 +87,18 @@
                         <!-- 一级分类 -->
                         <div class="filter-item">
                             <ul class="filter-tag" id="category"><span><i class="fa fa-folder-open-o"></i> 分类：</span>
-                                <li><a  name="weixinqun" class="on" onclick="filterCategoryClick(1)">微信群大全</a></li>
-                                <li><a  name="gongzhonghao" class="" onclick="filterCategoryClick(2)">公众号互关</a></li>
+                                <li><a class="on" onclick="filterCategoryClick(0)">微信群大全</a></li>
+                                <li><a class="" onclick="filterCategoryClick(1)">公众号互关</a></li>
                             </ul>
                         </div>
-
+                        <!-- 相关标签 -->
+                        <div class="filter-item">
+                            <ul class="filter-tag"><span><i class="fa fa-tags"></i> 标签：</span>
+                                <li><a class="on" onclick="filterCategoryClick(0)">全部</a></li>
+                                <li><a onclick="filterCategoryClick(1)">下载</a></li>
+                                <li><a onclick="filterCategoryClick(2)">录屏</a></li>
+                            </ul>
+                        </div>
                         <!-- 排序 -->
                         <div class="filter-item">
                             <ul class="filter-tag"><span><i class="fa fa-sort-alpha-desc"></i> 排序：</span>
@@ -126,30 +140,34 @@
                             <div class="footer--logo mb-20">
                                 <img class="tap-logo" src="static/picture/logo.png" data-dark="" alt="流木领域">
                             </div>
-
+                            <p class="mb-10">
+                                不失初心，不忘初衷!</p>
                         </div>
                     </div>
                     <!-- .col-md-2 end -->
                     <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-1 widget--links">
                         <div class="widget--title">
-                            <h5>友情链接</h5>
+                            <h5>本站导航</h5>
                         </div>
                         <div class="widget--content">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#">百度</a> </li>
-                                <li><a href="#">搜狗</a></li>
-                                <li><a href="#">腾讯</a></li>
-                                <li><a href="#">淘宝</a></li>
+                                <li><a href="#">关于我们</a></li>
+                                <li><a href="#">充值说明</a></li>
+                                <li><a href="#">下载说明</a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- .col-md-2 end -->
                     <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
                         <div class="widget--title">
-                            <h5 style='text-align:center'>QQ群二维码</h5>
+                            <h5>更多介绍</h5>
                         </div>
                         <div class="widget--content">
-                            <img src="static/picture/wechat_qcode.jpg">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#">隐私协议</a></li>
+                                <li><a href="#">权限说明</a></li>
+                                <li><a href="#">账户中心</a></li>
+                            </ul>
                         </div>
                     </div>
                     <!-- .col-md-2 end -->

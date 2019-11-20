@@ -80,7 +80,7 @@ function signup_popup(){
   'use strict';
 /*登陆按钮*/
   $(".login-btn").on("click", function(event) {
-      var token=sessionStorage.getItem("token")
+      var token=sessionStorage.getItem("token");
       if(token==null){
           event.preventDefault();
           open_signup_popup()
@@ -89,7 +89,16 @@ function signup_popup(){
           self.location="user.html"
       }
   });
-
+/*发布*/
+    $(".release-btn").on("click", function(event) {
+        var token=sessionStorage.getItem("token");
+        if(token==null){
+            event.preventDefault();
+            open_signup_popup()
+        }else{
+            /*开始发布*/
+        }
+    });
   $(".must-log-in a").on("click", function(event) {
       event.preventDefault();
       open_signup_popup()

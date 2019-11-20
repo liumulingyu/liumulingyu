@@ -1,33 +1,36 @@
 /*点击分类*/
 var host="http://47.106.187.85/"
 var host2="http://localhost:8089/"
-function categoryClick(data){
-    if (data==1){
-        feedList();
-    }else{
-        document.getElementById("feed-list").innerHTML="";
+/*分类点击*/
+function filterCategoryClick(data) {
+    var childs = document.getElementById("category").children
+    for (i = 1; i < childs.length; i++) {
+        if (data == i) {
+            childs[i].children[0].setAttribute("class", "on");
+            start(childs[i].children[0].getAttribute("name"));
+        } else {
+            childs[i].children[0].setAttribute("class", "");
+        }
     }
 }
-
-var ul=document.getElementById("category");
-var li=document.createElement("li")
-li.innerHTML="<a class=\"on\" onclick=\"categoryClick(1)\">微信群</a>"
-ul.append(li)
-
-$.ajax({
-    url: host,
-    type: 'GET',
-    dataType: 'json',
-    data: {
-        "type":10
-    },
-}).done(function(response) {
-    if (response.meta.success){
-        feedList(response.data)
-    }
-   });
+start(0);
+function start(type){
+    $.ajax({
+        url: host2+"wechat/getWechatList",
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            "type":type
+        },
+    }).done(function(response) {
+        if (response.meta.success){
+            feedList(response.data)
+        }
+    });
+}
 function feedList(data) {
     var div=document.getElementById("feed-list");
+    div.innerHTML="";
     for (i=0;i<data.length;i++){
         var itemDiv=document.createElement("div");
         itemDiv.setAttribute("class","col-sm-6 col-md-4 col-lg-3")
@@ -51,9 +54,8 @@ function feedList(data) {
 
         var entryExcerpt=document.createElement("div");
         entryExcerpt.setAttribute("class","entry-excerpt u-text-format");
-        entryExcerpt.append(data[i].user_name+"Pandownload软件关停公告\n很多小伙伴在说，最近这段时间，使用Pando...\n");
+        entryExcerpt.append(data[i].describe);
         entryWrapper.append(entryExcerpt)
-
         entryMedia.append(placeholder);
         article.append(entryMedia);
         article.append(entryWrapper);

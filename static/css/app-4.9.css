@@ -1845,7 +1845,23 @@ div.wpcf7-response-output {
     background-image: -webkit-linear-gradient(45deg,#2196F3,#03A9F4);
     -webkit-animation: hue 7s infinite linear;
 }
-
+.navbar .release-btn {
+    align-items: center;
+    background-color: #ff6a5f;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    height: 30px;
+    justify-content: center;
+    transition: background-color 0.5s cubic-bezier(0.77,0,0.175,1),border-color 0.5s cubic-bezier(0.77,0,0.175,1);
+    width: 80px;
+    margin-right: 10px;
+    background-image: -webkit-linear-gradient(45deg,#2196F3,#03A9F4);
+    -webkit-animation: hue 7s infinite linear;
+}
 .navbar .user-pbtn {
     align-items: center;
     background-color: #34495e;
@@ -1871,7 +1887,13 @@ div.wpcf7-response-output {
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
+.navbar .release-btn:hover,.navbar .user-pbtn:hover {
+    opacity: 0.8;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
 .navbar-transparent.with-hero:not(.ads-before-header):not(.ads-after-header) .site-header,.navbar-sticky_transparent.with-hero:not(.navbar-sticky):not(.ads-before-header):not(.ads-after-header) .site-header {
     background-color: transparent;
     box-shadow: none;
