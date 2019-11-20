@@ -7,7 +7,8 @@ function filterCategoryClick(data) {
     for (i = 1; i < childs.length; i++) {
         if (data == i) {
             childs[i].children[0].setAttribute("class", "on");
-            start(childs[i].children[0].getAttribute("name"));
+            //childs[i].children[0].getAttribute("name")
+            start(1);
         } else {
             childs[i].children[0].setAttribute("class", "");
         }
