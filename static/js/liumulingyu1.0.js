@@ -16,7 +16,7 @@ function filterCategoryClick(data) {
 start(0);
 function start(type){
     $.ajax({
-        url: host2+"wechat/getWechatList",
+        url: host+"wechat/getWechatList",
         type: 'GET',
         dataType: 'json',
         data: {
