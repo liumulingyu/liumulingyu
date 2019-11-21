@@ -1,6 +1,6 @@
 var host="http://47.106.187.85/"
 var testHost="http://localhost:8089/"
-var isdebug=true;//是否调试状态
+var isdebug=false;//是否调试状态
 if (isdebug){
     host=testHost;
 }
