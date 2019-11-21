@@ -1,4 +1,9 @@
-
+var host="http://47.106.187.85/"
+var testHost="http://localhost:8089/"
+var isdebug=true;//是否调试状态
+if (isdebug){
+    host=testHost;
+}
 var body = jQuery('body');
 var st = 0;
 var lastSt = 0;
@@ -24,12 +29,10 @@ jQuery(function() {
   userinit();
   signup_popup();
   share_pop();
-  widget_ri();
 });
 
 jQuery(window).scroll(function() {
   'use strict';
-
   if (body.hasClass('navbar-sticky') || body.hasClass('navbar-sticky_transparent')) {
     window.requestAnimationFrame(navbar);
   }
@@ -75,12 +78,11 @@ function open_signup_popup(){
   })
 }
 
-
 function signup_popup(){
   'use strict';
+   var token=sessionStorage.getItem("token");
 /*登陆按钮*/
   $(".login-btn").on("click", function(event) {
-      var token=sessionStorage.getItem("token");
       if(token==null){
           event.preventDefault();
           open_signup_popup()
@@ -89,14 +91,19 @@ function signup_popup(){
           self.location="user.html"
       }
   });
+    $(".outlogin-btn").on("click", function(event) {
+        event.preventDefault();
+        sessionStorage.clear();
+        self.location="index.html"
+    });
 /*发布*/
     $(".release-btn").on("click", function(event) {
-        var token=sessionStorage.getItem("token");
         if(token==null){
             event.preventDefault();
             open_signup_popup()
         }else{
             /*开始发布*/
+            self.location="release.html";
         }
     });
   $(".must-log-in a").on("click", function(event) {
@@ -136,19 +143,20 @@ function signup_popup(){
     var _this = $(this)
     var deft = _this.text()
     _this.html(iconspin+deft)
-    $.post(caozhuti.ajaxurl, {
-        "action": "user_login",
-        "username": $("input[name='username']").val(),
-        "password": $("input[name='password']").val(),
-        "rememberme": $("input[name='rememberme']").val()
+    $.post(host+"user/login", {
+        "user_name": $("input[name='username']").val(),
+        "user_pwd": $("input[name='password']").val()
     }, function(data) {
-        if (data.status == 1) {
-          _this.html(iconcheck+data.msg)
+        if (data.meta.success) {
+          _this.html(iconcheck+data.data.message)
+            sessionStorage.setItem("token",data.data.token);
+            sessionStorage.setItem("userName",data.data.userName);
+            sessionStorage.setItem("userIntegral",data.data.userIntegral);
           setTimeout(function(){
               location.reload()
-          },1000)
+          },200)
         }else{
-          _this.html(iconwarning+data.msg)
+          _this.html(iconwarning+data.meta.message)
           setTimeout(function(){
               _this.html(deft)
           },2000)
@@ -199,10 +207,7 @@ function signup_popup(){
         }
     });
   })
-
-
 }
-
 
 function share_pop() {
 
@@ -239,732 +244,249 @@ function share_pop() {
 
 }
 
-
-function userinit(){
-  'use strict';
-
-  //用户中心 修改个人信息
-  $('[etap="submit_info"]').on('click', function(){
-      var _this = $(this)
-      var deft = _this.text()
-      var email = $("input[name='email']").val();
-      var nickname = $("input[name='nickname']").val();
-      var user_avatar_type = $("input[name='user_avatar_type']:checked").val();
-      var phone = $("input[name='phone']").val();
-      var qq = $("input[name='qq']").val();
-      var description = $("textarea[name='description']").val();
-      var captcha = $("input[name='edit_email_cap']").val();
-      _this.html(iconspin+deft)
-      $.post(caozhuti.ajaxurl,
-          {
-              nickname: nickname,
-              email: email,
-              phone: phone,
-              qq: qq,
-              description: description,
-              user_avatar_type: user_avatar_type,
-              captcha: captcha,
-              action: 'edit_user_info'
-          },
-          function (data) {
-              if (data == '1') {
-                _this.html(deft)
-                Swal.fire({
-                  type: 'success',
-                  title: '修改成功',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-                setTimeout(function(){location.reload()},1000)
-              }else{
-                _this.html(deft)
-                swal.fire({
-                  type: 'error',
-                  title: data
-                }) 
-              }
-          }
-      );
-  });
-
-  // 头像上传
-  $("#addPic").change(function(e){
-    var _this = $(this)
-    var nonce = _this.data("nonce")
-    var file = e.currentTarget.files[0];
-
-    // console.log(file)
-
-    //结合formData实现图片预览
-    var sendData=new FormData();
-    sendData.append('nonce',nonce);
-    sendData.append('action','update_avatar_photo');
-    sendData.append('file',file);
-
-    const Toast = Swal.mixin({
-        toast: true,
-        showConfirmButton: false,
-        timer: 3000
-      });
-
-    $.ajax({
-      url: caozhuti.ajaxurl,
-      type: 'POST',
-      cache: false,
-      data: sendData,
-      processData: false,
-      contentType: false
-    }).done(function(res) {
-      if (res.status == 1) {
-        Toast.fire({
-          type: 'success',
-          title: res.msg
-        })
-        setTimeout(function(){location.reload()},1000)
-      }else{
-        Toast.fire({
-          type: 'error',
-          title: res.msg
-        })
-      }
-
-    }).fail(function(res) {
-      Toast.fire({
-        type: 'error',
-        title: '网络错误'
-      })
-    });
-
-  });
-
-  // 发送验证码 用户中心
-  $(".edit_email_cap").on("click",function(){
-      var _this = $(this)
-      var deft = _this.text()
-      var user_email = $("input[name='email']").val()
-      _this.html(iconspin+deft)
-      //验证邮箱
-      if( !is_check_mail(user_email) ){
-        Swal.fire({
-            type: 'error',
-            title:'邮箱格式错误'
-          })
-          return false;
-      }
-      $.post(caozhuti.ajaxurl, {
-          "action": "captcha_email",
-          "user_email": user_email
-      }, function(data) {
-          if (data.status == 1) {
-            _this.html(deft)
-            Swal.fire({
-              type: 'success',
-              title: data.msg,
-              showConfirmButton: false,
-              timer: 1500
-            })
-            // _this.html(data.msg)
-            _this.attr("disabled","true");
-          }else{
-            _this.html(deft)
-            Swal.fire({
-              type: 'error',
-              title: data.msg
-            })
-          }
-      });
-  });
-
-  // 发送验证码 注册
-  $(document).on('click', ".go-captcha_email", function (event) {
-      var _this = $(this)
-      var deft = _this.text()
-      var user_email = $("input[name='user_email']").val()
-      _this.html(iconspin+deft)
-      _this.attr("disabled","true");
-      //验证邮箱
-      if( !is_check_mail(user_email) ){
-          _this.html(iconwarning+'邮箱错误')
-          setTimeout(function(){
-            _this.html(deft)
-            _this.removeAttr("disabled")
-          },3000)
-          return false;
-      }
-      $.post(caozhuti.ajaxurl, {
-          "action": "captcha_email",
-          "user_email": user_email
-      }, function(data) {
-          if (data.status == 1) {
-            _this.html(iconcheck+'发送成功')
-            setTimeout(function(){_this.html(deft)},3000)
-          }else{
-            _this.html(iconwarning+data.msg)
-            setTimeout(function(){
-              _this.html(deft)
-              _this.removeAttr("disabled")
-            },3000)
-          }
-      });
-  });
-
-  //解除绑定QQ unset_qq_open
-  $('.unset-bind').on('click', function(){
-      var _this = $(this)
-      var deft = _this.text()
-      var unsetid = $(this).data('id');
-      var msg = "确定解绑？";
-      _this.html(iconspin+deft)
-      Swal.fire({
-        title: msg,
-        text: "解绑后需要重新绑定",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-      }).then((result) => {
-        if (result.value) {
-          $.post(caozhuti.ajaxurl,{action: 'unset_open_oauth',unsetid: unsetid},
-              function (data) {
-                  if (data == 1) {
-                    _this.html(deft)
-                    Swal.fire('解绑成功','','success')
-                    setTimeout(function(){location.reload()},1000)
-                  }else{
-                    _this.html(deft)
-                    Swal.fire('解绑失败','','error')
-                  }
-              }
-          );  
-        }
-      })
-
-  });
-  //vipbox
-  $('.payvip-box .vip-info').on('click', function () {
-      var _this = $(this); 
-      var id = _this.data('id');
-      _this.parents(".payvip-box").find('.vip-info').removeClass("active")
-      _this.addClass('active');
-      $("input[name='pay_id']").val(id);
-      $('.go-payvip').removeAttr("disabled");
-  });
-
-  $('.go-payvip').on('click', function () {
-      var _this = $(this); 
-      var pay_id = $("input[name='pay_id']").val();
-      var nonce = _this.data("nonce");
-      var deft = _this.html()
-      _this.html(iconspin+deft)
-      $.post(caozhuti.ajaxurl,
-          {
-              nonce: nonce,
-              pay_id: pay_id,
-              action: 'pay_vip'
-          },
-          function (data) {
-              if (data.status == '1') {
-                _this.html(deft)
-                Swal.fire('',data.msg,'success').then((result) => {if (result.value) {location.reload()}})
-              }else{
-                _this.html(deft)
-                Swal.fire('',data.msg,'warning')
-              }
-          }
-      );
-      
-  });
-
-  // 输入金额充值
-  $("#charge_num").bind("input propertychange",function(event){
-     var rate = $('#rmbnum').data('rate');
-     var inputnum = $("#charge_num").val();
-     var cnynum = inputnum/rate;
-     $('#rmbnum b').text(cnynum);
-     if (cnynum > 0) {
-          $('.go-charge').removeAttr("disabled")
-     }else{
-          $('.go-charge').attr("disabled","true");
-     }
-  });
-
-  // 快速选择
-  $('.amounts ul li').on('click', function () {
-      var rate = $('#rmbnum').data('rate');
-      $(this).find('p').addClass('selected');
-      $(this).siblings($('.amounts ul li')).find('p').removeClass('selected');
-      var cnynum = $(this).data('price')/rate;
-      $("input[name='charge_num']").val($(this).data('price'));
-      $('#rmbnum b').text(cnynum);
-      $('.go-charge').removeAttr("disabled");
-  });
-
-  // 卡密使用按钮 go-cdk to cdk_pay
-  $('.go-cdk').on('click', function () {
-      var _this = $(this);
-      var cdkcode = $("input[name='cdkcode']").val();
-      var nonce = _this.data('nonce');
-      var deft = _this.html()
-      _this.html(iconspin+deft)
-      Swal.fire({
-        allowOutsideClick:false,
-        width: 200,
-        timer: 60000,
-        onBeforeOpen: () => {
-          Swal.showLoading()
-          $.post(caozhuti.ajaxurl, {
-              "action": "cdk_pay",
-              "cdkcode": cdkcode,
-              "nonce": nonce
-          }, function(data) {
-              if (data.status == 1) {
-                _this.html(deft)
-                Swal.fire('',data.msg,'success').then((result) => { if (result.value) { location.reload() } })
-              }else{
-                _this.html(deft)
-                Swal.fire('',data.msg,'error')
-              }
-          });
-        },
-      })
-      
-  });
-
-  // 卡密切换
-  $("input[name='pay_type']").change(function(){
-    var _this = $(this);
-    var el_1 = $("#yuecz");
-    var el_2 = $("#kamidiv");
-    var pay_type = $("input[name='pay_type']:checked").val();
-    if (pay_type == 3) {
-      el_1.hide();
-      el_2.show();
-      $('.go-charge').attr("disabled","true");
-    }else{
-      el_2.hide();
-      el_1.show();
-      $('.go-charge').removeAttr("disabled");
-    }
-    
-  });
-
-  // 充值按钮 go-charge 
-  $('.go-charge').on('click', function () {
-      var _this = $(this);
-      var charge_num = $("input[name='charge_num']").val();
-      var pay_type = $("input[name='pay_type']:checked").val();
-      var nonce = _this.data('nonce');
-      var deft = _this.html()
-      _this.html(iconspin+deft)
-
-      Swal.fire({
-        allowOutsideClick:false,
-        width: 200,
-        timer: 60000,
-        onBeforeOpen: () => {
-          Swal.showLoading()
-          $.post(caozhuti.ajaxurl, {
-              "action": "charge_pay",
-              "charge_num": charge_num,
-              "pay_type": pay_type,
-              "nonce": nonce
-          }, function(result) {
-              // console.log(data)
-              if (result.status == 1) {
-                  if (result.type == 2) {
-                      window.location.href=result.rurl
-                  }else{
+function userinit() {
+    'use strict';
+    //用户中心 修改个人信息
+    $('[etap="submit_info"]').on('click', function () {
+        var _this = $(this)
+        var deft = _this.text()
+        var email = $("input[name='email']").val();
+        var nickname = $("input[name='nickname']").val();
+        var user_avatar_type = $("input[name='user_avatar_type']:checked").val();
+        var phone = $("input[name='phone']").val();
+        var qq = $("input[name='qq']").val();
+        var description = $("textarea[name='description']").val();
+        var captcha = $("input[name='edit_email_cap']").val();
+        _this.html(iconspin + deft)
+        $.post(caozhuti.ajaxurl,
+            {
+                nickname: nickname,
+                email: email,
+                phone: phone,
+                qq: qq,
+                description: description,
+                user_avatar_type: user_avatar_type,
+                captcha: captcha,
+                action: 'edit_user_info'
+            },
+            function (data) {
+                if (data == '1') {
                     _this.html(deft)
                     Swal.fire({
-                      html: result.msg,
-                      showConfirmButton: false,
-                      width: 300,
-                      padding: '2em',
-                      background: 'rgb(224, 224, 224)',
-                      allowOutsideClick:false,
-                      imageUrl: result.img,
-                      imageWidth: 200,
-                      imageHeight: 200,
-                      showCloseButton: true,
-                      animation: true
+                        type: 'success',
+                        title: '修改成功',
+                        showConfirmButton: false,
+                        timer: 1500
                     })
-                    var checkOrder = setInterval(function() {
-                        $.post(caozhuti.ajaxurl, {
-                            "action": "check_pay",
-                            "num": result.num,
-                        }, function(data) {
-                            if(data.status == 1){
-                                clearInterval(checkOrder)
-                                Swal.fire({
-                                  type: 'success',
-                                  title: data.msg,
-                                  showConfirmButton: false,
-                                  timer: 1500
-                                }).then((result) => { if (result.value) { location.reload() } })
-                            }
-                        });
-                    }, 3000);
-                  }
-              }else{
-                  // 错误提示
-                  _this.html(deft)
-                  Swal.fire('',result.msg,'error')
-              }
-          });
-        },
-      })
-      
-  });
-
-  //推广中心 复制按钮
-  var btn = document.getElementById('refurl');
-  if (btn) {
-    var href = $('#refurl').data("clipboard-text");
-    var clipboard = new ClipboardJS(btn);
-    
-
-    clipboard.on('success', function(e) {
-      const Toast = Swal.mixin({
-        toast: true,
-        showConfirmButton: false,
-        timer: 3000
-      });
-      Toast.fire({
-        type: 'success',
-        title: '复制成功：'+href
-      })
-    });
-    clipboard.on('error', function(e) {
-      const Toast = Swal.mixin({
-        toast: true,
-        showConfirmButton: false,
-      });
-      Toast.fire({
-        type: 'error',
-        title: '复制失败：'+href
-      })
-    });
-  }
-
-  //提现申请
-  $('.go-add_reflog').on('click', function () {
-      var _this = $(this);
-      var deft = _this.html()
-      var money = $("input[name='refmoney']").val();
-      var qr_weixin = $("input[name='qr_weixin']").val();
-      var qr_alipay = $("input[name='qr_alipay']").val();
-      var max_money = _this.data("max");
-      var nonce = _this.data('nonce');
-      _this.html(iconspin+deft)
-      if (!money) {
-        _this.html(deft)
-        Swal.fire('','请输入提现金额','warning')
-        return false;
-      }
-      if (money > max_money) {
-        _this.html(deft)
-        Swal.fire('','可提现金额不足','warning')
-        return false;
-      }
-
-      $.post(caozhuti.ajaxurl, {
-          "action": "add_reflog",
-          "money": money,
-          "nonce": nonce
-      }, function(data) {
-          if (data.status == 1) {
-              _this.html(deft)
-              Swal.fire('',data.msg,'success').then((result) => { if (result.value) { location.reload() } })
-          }else{
-            _this.html(deft)
-            Swal.fire('',data.msg,'warning')
-          }
-      });
-  });
-
-  //修改收款码
-  $('[etap="submit_qr"]').on('click', function(){
-      var _this = $(this)
-      var deft = _this.html()
-      var qr_alipay = $("input[name='qr_alipay']").val();
-      var qr_weixin = $("input[name='qr_weixin']").val();
-      // var fd_qr_weixin = qr_weixin.indexOf("wxp://");
-      // var fd_qr_alipay = qr_alipay.indexOf("https://qr.alipay.com/");
-      _this.html(iconspin+deft)
-      if (qr_alipay == '') {
-        _this.html(deft)
-        Swal.fire('','支付宝收款码不正确','warning')
-        return false;
-      }
-      if (qr_weixin == '') {
-        _this.html(deft)
-        Swal.fire('','微信收款码不正确','warning')
-        return false;
-      }
-      $.post(caozhuti.ajaxurl,
-          {
-              qr_alipay: qr_alipay,
-              qr_weixin: qr_weixin,
-              action: 'edit_user_qr'
-          },
-          function (data) {
-              if (data == '1') {
-                _this.html(deft)
-                Swal.fire('','保存成功','success').then((result) => {if (result.value) {location.reload()}})
-              }else{
-                _this.html(deft)
-                Swal.fire('','上传失败','error')
-              }
-          }
-      );
-  });
-
-  //修改密码
-  $('.go-repassword').on('click', function(event){
-    event.preventDefault()
-    var _this = $(this)
-    var deft = _this.html()
-    var password = $("input[name='password']").val();
-    var new_password = $("input[name='new_password']").val();
-    var re_password = $("input[name='re_password']").val();
-    _this.html(iconspin+deft)
-    if (!(password && new_password && re_password)) {
-      _this.html(deft)
-      Swal.fire('','请输入完整密码','warning')
-      return false;
-    }
-    if (new_password != re_password) {
-      _this.html(deft)
-      Swal.fire('','两次输入新密码不一致','warning')
-      return false;
-    }
-    
-    $.post(caozhuti.ajaxurl,
-        {
-          password: password,
-          new_password: new_password,
-          re_password: re_password,
-          action: 'edit_repassword'
-        },
-        function (data) {
-          if (data == '1') {
-            _this.html(deft)
-            Swal.fire('','修改成功','success').then((result) => {if (result.value) {location.reload()}})
-          }else{
-            _this.html(deft)
-            Swal.fire('',data,'error')
-          }
-        }
-    );
-
-  });
-
-
-  //投稿 go-write_post write_post
-  if (document.getElementById("editor")) {
-    $("select[name='cao_status']").change(function(){
-        var cao_status = $(this).val();
-        if (cao_status == 'free') {
-            $(".hide1,.hide2,.hide3,.hide4,.hide5").hide()
-        }
-        if (cao_status == 'fee') {
-            $(".hide5").hide()
-            $(".hide1,.hide2,.hide3,.hide4").show()
-        }
-        if (cao_status == 'hide') {
-            $(".hide3,.hide4").hide()
-            $(".hide1,.hide2,.hide5").show()
-        }
-    })
-
-    //插入编辑器
-    var E = window.wangEditor
-    var editor = new E('#editor')
-    editor.customConfig.uploadImgServer = caozhuti.ajaxurl
-    // 将图片大小限制为 2M
-    editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024
-    editor.customConfig.uploadImgParams = {
-        nonce: $(".go-write_post").data("nonce"),
-        action: 'update_img'
-    }
-    editor.customConfig.uploadFileName = 'file'
-    editor.create()
-
-  }
-
-  
-
-  $('.go-write_post').on('click', function(event){
-    event.preventDefault()
-    var _this = $(this)
-    var deft = _this.html()
-
-    var post_title = $("input[name='post_title']").val();
-    var tinymce = $("#post_content_ifr").contents().find("#tinymce"); 
-    var post_content = editor.txt.html();
-    var post_cat = $("select[name='post_cat']").val();
-    var cao_status = $("select[name='cao_status']").val();
-    var cao_price = $("input[name='cao_price']").val();
-    var post_excerpt = $("textarea[name='post_excerpt']").val();
-    var cao_vip_rate = $("input[name='cao_vip_rate']").val();
-    var cao_pwd = $("input[name='cao_pwd']").val();
-    var cao_downurl = $("input[name='cao_downurl']").val();
-    var post_status = _this.data("status");
-    var edit_id = _this.data("edit_id") ? _this.data("edit_id") : 0;
-    var nonce = _this.data("nonce");
-
-    _this.html(iconspin+deft)
-    if (post_title.length < 6) {
-      _this.html(deft)
-      Swal.fire('','标题最低6个字符','warning')
-      return false;
-    }
-    if (post_content == '') {
-      _this.html(deft)
-      Swal.fire('','请输入文章内容','warning')
-      return false;
-    }
-    if (cao_status != 'free') {
-        if (cao_price <= 0) {
-          _this.html(deft)
-          Swal.fire('','请输入正确价格（整数）','warning')
-          return false;
-        }
-        if ((cao_vip_rate>1) || (cao_vip_rate < 0)) {
-          _this.html(deft)
-          Swal.fire('','折扣区间必须是：0.1~1','warning')
-          return false;
-        }
-    }
-
-    if (cao_status == 'fee') {
-        if (cao_downurl.length < 5) {
-          _this.html(deft)
-          Swal.fire('','请输入下载地址','warning')
-          return false;
-        }
-    }
-    console.log(post_excerpt)
-    
-    
-    
-    $.post(caozhuti.ajaxurl,
-        {
-          post_title: post_title,
-          post_content: post_content,
-          post_excerpt: post_excerpt,
-          post_cat: post_cat,
-          cao_status: cao_status,
-          cao_price: cao_price,
-          cao_vip_rate: cao_vip_rate,
-          cao_pwd: cao_pwd,
-          cao_downurl: cao_downurl,
-          post_status: post_status,
-          edit_id: edit_id,
-          action: 'cao_write_post'
-        },
-        function (data) {
-          if (data.status == 1) {
-            _this.html(deft)
-            Swal.fire({
-              html: data.msg,
-              type: 'success',
-            }).then((result) => {
-              if (result.value) {
-                location.reload()
-              }
-            })
-          }else{
-            _this.html(deft)
-            Swal.fire('',data.msg,'warning')
-          }
-        }
-    );
-
-  });
-
-
-}
-// end function
-
-// widget
-function widget_ri(){
-  'use strict';
-  // 文章购买按钮 go-pay
-  $(".click-pay").on("click",function(){
-    var _this = $(this)
-    var deft = _this.html()
-    var post_id = $(this).data("postid")
-    var nonce = $(this).data("nonce")
-    var price = $(this).data("price")
-    _this.html(iconspin+deft)
-
-    Swal.fire({
-      // title: '购买确认',
-      text: "购买此资源将消耗【"+price+"】",
-      type: 'question',
-      showCancelButton: true,
-      confirmButtonText: '购买',
-      cancelButtonText: '取消',
-      reverseButtons: true,
-      onClose: () => {
-        _this.html(deft)
-      }
-    }).then((result) => {
-      if (result.value) {
-        // 开始请求
-        Swal.fire({
-          allowOutsideClick:false,
-          width: 200,
-          timer: 60000,
-          onBeforeOpen: () => {
-            Swal.showLoading()
-            $.post(caozhuti.ajaxurl, {
-                "action": "add_pay_post",
-                "post_id": post_id,
-                "nonce": nonce
-            }, function(data) {
-                if (data.status == 1) {
-                  Swal.fire({
-                    title: data.msg,
-                    type: 'success',
-                  }).then((result) => {
-                    if (result.value) {
-                      location.reload()
-                    }
-                  })
-                }else{
-                  Swal.fire({
-                    type: 'warning',
-                    html: data.msg,
-                  })
-                  // Swal.fire('',data.msg,'error')
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1000)
+                } else {
+                    _this.html(deft)
+                    swal.fire({
+                        type: 'error',
+                        title: data
+                    })
                 }
+            }
+        );
+    });
+
+    // 头像上传
+    $("#addPic").change(function (e) {
+        var _this = $(this)
+        var nonce = _this.data("nonce")
+        var file = e.currentTarget.files[0];
+        // console.log(file)
+        //结合formData实现图片预览
+        var sendData = new FormData();
+        sendData.append('nonce', nonce);
+        sendData.append('action', 'update_avatar_photo');
+        sendData.append('file', file);
+
+        const Toast = Swal.mixin({
+            toast: true,
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $.ajax({
+            url: caozhuti.ajaxurl,
+            type: 'POST',
+            cache: false,
+            data: sendData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            if (res.status == 1) {
+                Toast.fire({
+                    type: 'success',
+                    title: res.msg
+                })
+                setTimeout(function () {
+                    location.reload()
+                }, 1000)
+            } else {
+                Toast.fire({
+                    type: 'error',
+                    title: res.msg
+                })
+            }
+
+        }).fail(function (res) {
+            Toast.fire({
+                type: 'error',
+                title: '网络错误'
+            })
+        });
+
+    });
+
+    // 发送验证码 用户中心
+    $(".edit_email_cap").on("click", function () {
+        var _this = $(this)
+        var deft = _this.text()
+        var user_email = $("input[name='email']").val()
+        _this.html(iconspin + deft)
+        //验证邮箱
+        if (!is_check_mail(user_email)) {
+            Swal.fire({
+                type: 'error',
+                title: '邮箱格式错误'
+            })
+            return false;
+        }
+        $.post(caozhuti.ajaxurl, {
+            "action": "captcha_email",
+            "user_email": user_email
+        }, function (data) {
+            if (data.status == 1) {
+                _this.html(deft)
+                Swal.fire({
+                    type: 'success',
+                    title: data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                // _this.html(data.msg)
+                _this.attr("disabled", "true");
+            } else {
+                _this.html(deft)
+                Swal.fire({
+                    type: 'error',
+                    title: data.msg
+                })
+            }
+        });
+    });
+
+    // 发送验证码 注册
+    $(document).on('click', ".go-captcha_email", function (event) {
+        var _this = $(this)
+        var deft = _this.text()
+        var user_email = $("input[name='user_email']").val()
+        _this.html(iconspin + deft)
+        _this.attr("disabled", "true");
+        //验证邮箱
+        if (!is_check_mail(user_email)) {
+            _this.html(iconwarning + '邮箱错误')
+            setTimeout(function () {
+                _this.html(deft)
+                _this.removeAttr("disabled")
+            }, 3000)
+            return false;
+        }
+        $.post(caozhuti.ajaxurl, {
+            "action": "captcha_email",
+            "user_email": user_email
+        }, function (data) {
+            if (data.status == 1) {
+                _this.html(iconcheck + '发送成功')
+                setTimeout(function () {
+                    _this.html(deft)
+                }, 3000)
+            } else {
+                _this.html(iconwarning + data.msg)
+                setTimeout(function () {
+                    _this.html(deft)
+                    _this.removeAttr("disabled")
+                }, 3000)
+            }
+        });
+    });
+    //推广中心 复制按钮
+    var btn = document.getElementById('refurl');
+    if (btn) {
+        var href = $('#refurl').data("clipboard-text");
+        var clipboard = new ClipboardJS(btn);
+        clipboard.on('success', function (e) {
+            const Toast = Swal.mixin({
+                toast: true,
+                showConfirmButton: false,
+                timer: 3000
             });
-          },
-        })
-        
-      }
-    })
-  });
+            Toast.fire({
+                type: 'success',
+                title: '复制成功：' + href
+            })
+        });
+        clipboard.on('error', function (e) {
+            const Toast = Swal.mixin({
+                toast: true,
+                showConfirmButton: false,
+            });
+            Toast.fire({
+                type: 'error',
+                title: '复制失败：' + href
+            })
+        });
+    }
+    //修改密码
+    $('.go-repassword').on('click', function (event) {
+        event.preventDefault()
+        var _this = $(this)
+        var deft = _this.html()
+        var password = $("input[name='password']").val();
+        var new_password = $("input[name='new_password']").val();
+        var re_password = $("input[name='re_password']").val();
+        _this.html(iconspin + deft)
+        if (!(password && new_password && re_password)) {
+            _this.html(deft)
+            Swal.fire('', '请输入完整密码', 'warning')
+            return false;
+        }
+        if (new_password != re_password) {
+            _this.html(deft)
+            Swal.fire('', '两次输入新密码不一致', 'warning')
+            return false;
+        }
 
-  $(".go-down").one("click",function(){
-    var _this = $(this);
-    var deft = _this.html()
-    var deftext = _this.text()
-    _this.html(iconspin+deftext)
-    setTimeout(function(){
-        _this.html(deft)
-    },5000)
-  });
+        $.post(caozhuti.ajaxurl,
+            {
+                password: password,
+                new_password: new_password,
+                re_password: re_password,
+                action: 'edit_repassword'
+            },
+            function (data) {
+                if (data == '1') {
+                    _this.html(deft)
+                    Swal.fire('', '修改成功', 'success').then((result) => {
+                        if (result.value) {
+                            location.reload()
+                        }
+                    })
+                } else {
+                    _this.html(deft)
+                    Swal.fire('', data, 'error')
+                }
+            }
+        );
 
-
+    });
 }
-// end function
-
 function navbar() {
   'use strict';
-
   st = jQuery(window).scrollTop();
   var adHeight = jQuery('.ads.before_header').outerHeight();
   var navbarHeight = jQuery('.site-header').height();
@@ -997,7 +519,6 @@ function navbar() {
 
 function carousel() {
   'use strict';
-
   jQuery('.carousel.module').owlCarousel({
     autoHeight: true,
     dots: false,
@@ -1142,10 +663,8 @@ function toggleDarkMode() {
     }
 }
 
-
 function categoryBoxes() {
   'use strict';
-
   jQuery('.category-boxes').owlCarousel({
     dots: false,
     margin: 30,
@@ -1171,7 +690,6 @@ function categoryBoxes() {
 
 function picks() {
   'use strict';
-
   jQuery('.picked-posts').not('.owl-loaded').owlCarousel({
     autoHeight: true,
     autoplay: true,
@@ -1221,7 +739,7 @@ function offCanvas() {
     }
   });
 }
-
+/*搜索*/
 function search() {
   'use strict';
 
@@ -1253,7 +771,7 @@ function search() {
 }
 
 
-
+/*侧边栏*/
 function pagination() {
   'use strict';
 
@@ -1287,7 +805,7 @@ function pagination() {
     wrapper.infiniteScroll(options);
   }
 }
-
+/*侧边栏*/
 function sidebar() {
   'use strict';
     var navbarHeight = jQuery('.site-header').height();
@@ -1299,8 +817,7 @@ function sidebar() {
     });
 
 }
-
-
+/*主题切换*/
 function dimmer(action, speed) {
   'use strict';
 
@@ -1316,35 +833,15 @@ function dimmer(action, speed) {
   }
 }
 
-//广告弹窗
-function ad_popup(url, title, w, h) {
-  'use strict';
-
-  title = title || '';
-  w = w || 500;
-  h = h || 300;
-
-  var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-  var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-  var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-  var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-  var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-  var top = ((height / 2) - (h / 2)) + dualScreenTop;
-  var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-
-  if (window.focus) {
-    newWindow.focus();
-  }
-}
-
+/*判断用户名是否合法*/
 function is_check_name(str) {    
     return /^[\w]{3,16}$/.test(str) 
 }
+/*判断邮箱是否合法*/
 function is_check_mail(str) {
     return /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/.test(str)
 }
+/*判断密码是否一致*/
 function is_check_pass(str1,str2) {
     if (str1.length < 6) {
         return false;
@@ -1353,4 +850,75 @@ function is_check_pass(str1,str2) {
        return false; 
     }
     return true;
+}
+/*分类点击*/
+function filterCategoryClick(data) {
+    var childs = document.getElementById("category").children
+    for (i = 1; i < childs.length; i++) {
+        if (data == i) {
+            childs[i].children[0].setAttribute("class", "on");
+            getWechatList(i-1,null);
+        } else {
+            childs[i].children[0].setAttribute("class", "");
+        }
+    }
+}
+function getWechatList(type,user_id){
+    $.ajax({
+        url: host+"wechat/getWechatList",
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            "type":type,
+            "user_id":user_id
+        },
+    }).done(function(response) {
+        if (response.meta.success){
+            feedList(response.data)
+        }
+    });
+}
+function feedList(data) {
+    var div=document.getElementById("feed-list");
+    div.innerHTML="";
+    for (i=0;i<data.length;i++){
+        var itemDiv=document.createElement("div");
+        itemDiv.setAttribute("class","col-sm-6 col-md-4 col-lg-3")
+        var article=document.createElement("article")
+        article.setAttribute("class","post post-grid post-450 type-post status-publish format-standard has-post-thumbnail hentry category-work category-tool tag-121 tag-118 tag-117 tag-110")
+        article.setAttribute("id","post-450")
+        var entryMedia=document.createElement("div");
+        entryMedia.setAttribute("class","entry-media");
+        var placeholder=document.createElement("div");
+        placeholder.setAttribute("class","placeholder");
+        placeholder.setAttribute("style","padding-bottom: 66.666666666667%;");
+        var img=document.createElement("img");
+        var a=document.createElement("a");
+        a.setAttribute("href","#")
+        img.setAttribute("class","lazyload");
+        img.setAttribute("data-src","static/picture/wechat_qcode.jpg");
+        img.setAttribute("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+        a.append(img)
+        placeholder.append(a)
+        var entryWrapper=document.createElement("div");
+        entryWrapper.setAttribute("class","entry-wrapper");
+
+        var entryHeader=document.createElement("header");
+        entryHeader.setAttribute("class","entry-header");
+        var h2=document.createElement("h2");
+        h2.setAttribute("class","entry-title");
+        h2.append("fdasfdasfds")
+        entryHeader.append(h2)
+
+        var entryExcerpt=document.createElement("div");
+        entryExcerpt.setAttribute("class","entry-excerpt u-text-format");
+        entryExcerpt.append(data[i].describe);
+        entryWrapper.append(entryHeader)
+        entryWrapper.append(entryExcerpt)
+        entryMedia.append(placeholder);
+        article.append(entryMedia);
+        article.append(entryWrapper);
+        itemDiv.append(article);
+        div.append(itemDiv);
+    }
 }
