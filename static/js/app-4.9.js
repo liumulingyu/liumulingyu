@@ -874,7 +874,7 @@ function getWechatList(type,user_id){
         },
     }).done(function(response) {
         if (response.meta.success){
-            feedList(response.data)
+         feedList(response.data)
         }
     });
 }
@@ -888,15 +888,14 @@ function feedList(data) {
         article.setAttribute("class","post post-grid post-450 type-post status-publish format-standard has-post-thumbnail hentry category-work category-tool tag-121 tag-118 tag-117 tag-110")
         article.setAttribute("id","post-450")
         var entryMedia=document.createElement("div");
-        entryMedia.setAttribute("class","entry-media");
         var placeholder=document.createElement("div");
         placeholder.setAttribute("class","placeholder");
-        placeholder.setAttribute("style","padding-bottom: 66.666666666667%;");
         var img=document.createElement("img");
         var a=document.createElement("a");
         a.setAttribute("href","#")
         img.setAttribute("class","lazyload");
-        img.setAttribute("data-src","static/picture/wechat_qcode.jpg");
+        //http://localhost:63342/web/static/picture/user_wechat_qcode.jpg
+        img.setAttribute("data-src","static/picture/user_wechat_qcode.jpg");
         img.setAttribute("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
         a.append(img)
         placeholder.append(a)
@@ -907,12 +906,24 @@ function feedList(data) {
         entryHeader.setAttribute("class","entry-header");
         var h2=document.createElement("h2");
         h2.setAttribute("class","entry-title");
-        h2.append("fdasfdasfds")
-        entryHeader.append(h2)
+        h2.innerHTML="<a rel=\"bookmark\">"+data[i].describe+"</a>";
+        var entry_meta=document.createElement("div");
+        entry_meta.setAttribute("class","entry-meta");
+        var text="微信群"
+        if (data[i].wx_type==1){
+            text="公众号";
+        }
+        entry_meta.innerHTML="   <span class=\"meta-category\">\n" +
+            "                                                        <a href=\"\" rel=\"category\">  <i class=\"dot\"></i>"+text+"</a>\n" +
+            "                                                        </span>";
+        entryHeader.append(entry_meta);
+        entryHeader.append(h2);
 
         var entryExcerpt=document.createElement("div");
-        entryExcerpt.setAttribute("class","entry-excerpt u-text-format");
-        entryExcerpt.append(data[i].describe);
+        //entryExcerpt.setAttribute("style","margin-bottom: 2px;");
+        entryExcerpt.innerHTML="  <div style=\"background: #0d95e8; margin-top: 10px;margin-bottom: 10px;border-radius:5px \">\n" +
+            "                                                <span ><h4 style=\"color: #FFFFFF;padding: 5px\">发布日期："+data[i].create_time+"</h4></span>\n" +
+            "                                            </div>";
         entryWrapper.append(entryHeader)
         entryWrapper.append(entryExcerpt)
         entryMedia.append(placeholder);

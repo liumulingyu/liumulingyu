@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <title>源码大全</title>
+    <title>微信俱乐部</title>
     <link rel='stylesheet' id='caozhuti-style-css' href='static/css/style-4.9.css' type='text/css' media='all'>
     <link rel='stylesheet' id='external-css' href='static/css/external-4.9.css' type='text/css' media='all'>
     <link rel='stylesheet' id='sweetalert2-css' href='static/css/sweetalert2.min-4.9.css' type='text/css' media='all'>
@@ -39,17 +39,8 @@
                         </li>
                         <li id="menu-item-101"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-101">
-                            <a href="index1.html">源码大全</a></li>
-                        <li id="menu-item-146"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category current-category-ancestor current-menu-ancestor current-menu-parent current-category-parent menu-item-has-children menu-item-146">
-                            <a href="tool.html">软件工具</a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-148"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-148"><a
-                                        href="ide.html">开发IDE</a></li>
+                            <a href="code.html">源码大全</a></li>
 
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
                 <div class="main-search">
@@ -61,8 +52,10 @@
                     <div class="search-close navbar-button"><i class="mdi mdi-close"></i></div>
                 </div>
                 <div class="actions">
+                    <!--发布-->
+                    <div class="release-btn navbar-button"><i class="mdi mdi-release"></i>发布</div>
                     <!-- user -->
-                    <div class="login-btn navbar-button"><i class="mdi mdi-account"></i>登录</div>
+                    <div class="login-btn navbar-button"><i class="mdi mdi-account"></i><span id="login_text">登录</span></div>
                     <!-- user end -->
                     <div class="search-open navbar-button"><i class="mdi mdi-magnify"></i></div>
                     <div class="tap-dark navbar-button"><i class="mdi mdi-brightness-4"></i></div>
@@ -87,18 +80,11 @@
                         <!-- 一级分类 -->
                         <div class="filter-item">
                             <ul class="filter-tag" id="category"><span><i class="fa fa-folder-open-o"></i> 分类：</span>
-                                <li><a class="on" onclick="filterCategoryClick(0)">微信群大全</a></li>
-                                <li><a class="" onclick="filterCategoryClick(1)">公众号互关</a></li>
+                                <li><a  name="weixinqun" class="on" onclick="filterCategoryClick(1)">微信群大全</a></li>
+                                <li><a  name="gongzhonghao" class="" onclick="filterCategoryClick(2)">公众号互关</a></li>
                             </ul>
                         </div>
-                        <!-- 相关标签 -->
-                        <div class="filter-item">
-                            <ul class="filter-tag"><span><i class="fa fa-tags"></i> 标签：</span>
-                                <li><a class="on" onclick="filterCategoryClick(0)">全部</a></li>
-                                <li><a onclick="filterCategoryClick(1)">下载</a></li>
-                                <li><a onclick="filterCategoryClick(2)">录屏</a></li>
-                            </ul>
-                        </div>
+
                         <!-- 排序 -->
                         <div class="filter-item">
                             <ul class="filter-tag"><span><i class="fa fa-sort-alpha-desc"></i> 排序：</span>
@@ -128,229 +114,231 @@
                 </div>
             </div>
         </div>
-    </div><!-- end sitecoent -->
 
-    <!--底部内容-->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-widget">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-3 widget--about">
-                        <div class="widget--content">
-                            <div class="footer--logo mb-20">
-                                <img class="tap-logo" src="static/picture/logo.png" data-dark="" alt="流木领域">
-                            </div>
-                            <p class="mb-10">
-                                不失初心，不忘初衷!</p>
-                        </div>
-                    </div>
-                    <!-- .col-md-2 end -->
-                    <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-1 widget--links">
-                        <div class="widget--title">
-                            <h5>本站导航</h5>
-                        </div>
-                        <div class="widget--content">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#">关于我们</a></li>
-                                <li><a href="#">充值说明</a></li>
-                                <li><a href="#">下载说明</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- .col-md-2 end -->
-                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
-                        <div class="widget--title">
-                            <h5>更多介绍</h5>
-                        </div>
-                        <div class="widget--content">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#">隐私协议</a></li>
-                                <li><a href="#">权限说明</a></li>
-                                <li><a href="#">账户中心</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- .col-md-2 end -->
-                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
-                        <div class="widget--title">
-                            <h5 style='text-align:center'>微信公众号</h5>
-                        </div>
-                        <div class="widget--content">
-                            <img src="static/picture/wechat_qcode.jpg">
-                        </div>
-                    </div>
+    </div>
+</div><!-- end sitecoent -->
 
-                    <!-- .col-md-2 end -->
-                    <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
-                        <div class="widget--title">
-                            <h5 style='text-align:center'>个人微信</h5>
+<!--底部内容-->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-widget">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 widget--about">
+                    <div class="widget--content">
+                        <div class="footer--logo mb-20">
+                            <img class="tap-logo" src="static/picture/logo.png" data-dark="" alt="流木领域">
                         </div>
-                        <div class="widget--content">
-                            <img src="static/picture/user_wechat_qcode.jpg">
-                        </div>
+
                     </div>
-
-
                 </div>
-            </div>
-            <div class="site-info">
-                © 流木领域 www.16ds.net 湘ICP备18017148号-1
+                <!-- .col-md-2 end -->
+                <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-1 widget--links">
+                    <div class="widget--title">
+                        <h5>友情链接</h5>
+                    </div>
+                    <div class="widget--content">
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="#">百度</a> </li>
+                            <li><a href="#">搜狗</a></li>
+                            <li><a href="#">腾讯</a></li>
+                            <li><a href="#">淘宝</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- .col-md-2 end -->
+                <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                    <div class="widget--title">
+                        <h5 style='text-align:center'>QQ群二维码</h5>
+                    </div>
+                    <div class="widget--content">
+                        <img src="static/picture/wechat_qcode.jpg">
+                    </div>
+                </div>
+                <!-- .col-md-2 end -->
+                <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                    <div class="widget--title">
+                        <h5 style='text-align:center'>微信公众号</h5>
+                    </div>
+                    <div class="widget--content">
+                        <img src="static/picture/wechat_qcode.jpg">
+                    </div>
+                </div>
+
+                <!-- .col-md-2 end -->
+                <div class="col-xs-12 col-sm-3 col-md-2 widget--links">
+                    <div class="widget--title">
+                        <h5 style='text-align:center'>个人微信</h5>
+                    </div>
+                    <div class="widget--content">
+                        <img src="static/picture/user_wechat_qcode.jpg">
+                    </div>
+                </div>
+
+
             </div>
         </div>
-    </footer>
-    <!--暂时不知道是干嘛的-->
-    <div class="rollbar">
-        <div class="rollbar-item" etap="to_top"><i class="fa fa-angle-up"></i></div>
+        <div class="site-info">
+            © 流木领域 www.16ds.net 湘ICP备18017148号-1
+        </div>
     </div>
-    <div class="dimmer"></div>
-    <!--登陆注册-->
-    <div id="popup-signup" class="popup-signup fade" style="display: none;">
-        <div class="register-login-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#login" data-toggle="login">登录</a>
-                        </li>
-                        <li><a href="#signup" data-toggle="signup">注册</a>
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="login">
-                            <div class="signup-form-container text-center">
-                                <form class="mb-0">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="username" placeholder="*用户名或邮箱">
-                                    </div>
-                                    <!-- .form-group end -->
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" name="password" placeholder="*密码">
-                                    </div>
-                                    <button type="button" class="go-login btn btn--primary btn--block">登录</button>
-
-                                </form>
-                                <!-- form  end -->
-                            </div>
-                            <!-- .signup-form end -->
-                        </div>
-                        <div class="tab-pane fade in" id="signup">
+</footer>
+<!--暂时不知道是干嘛的-->
+<div class="rollbar">
+    <div class="rollbar-item" etap="to_top"><i class="fa fa-angle-up"></i></div>
+</div>
+<div class="dimmer"></div>
+<!--登陆注册-->
+<div id="popup-signup" class="popup-signup fade" style="display: none;">
+    <div class="register-login-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="login">登录</a>
+                    </li>
+                    <li><a href="#signup" data-toggle="signup">注册</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="login">
+                        <div class="signup-form-container text-center">
                             <form class="mb-0">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="user_name" placeholder="输入英文用户名">
+                                    <input type="text" class="form-control" name="username" placeholder="*用户名">
                                 </div>
                                 <!-- .form-group end -->
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="user_email" placeholder="绑定邮箱">
+                                    <input type="password" class="form-control" name="password" placeholder="*密码">
                                 </div>
-                                <!-- .form-group end -->
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="user_pass" placeholder="密码最小长度为6">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="user_pass2" placeholder="再次输入密码">
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="captcha" placeholder="邮箱验证码">
-                                        <span class="input-group-btn">
-                                            <button class="go-captcha_email btn btn--secondary"
-                                                    type="button">发送验证码</button>
-                                          </span>
-                                    </div>
-                                </div>
-                                <button type="button" class="go-register btn btn--primary btn--block">立即注册</button>
+                                <button type="button" class="go-login btn btn--primary btn--block">登录</button>
 
                             </form>
                             <!-- form  end -->
                         </div>
+                        <!-- .signup-form end -->
+                    </div>
+                    <div class="tab-pane fade in" id="signup">
+                        <form class="mb-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user_name" placeholder="输入英文用户名">
+                            </div>
+                            <!-- .form-group end -->
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="user_email" placeholder="绑定邮箱">
+                            </div>
+                            <!-- .form-group end -->
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="user_pass" placeholder="密码最小长度为6">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="user_pass2" placeholder="再次输入密码">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="captcha" placeholder="邮箱验证码">
+                                    <span class="input-group-btn">
+                                            <button class="go-captcha_email btn btn--secondary"
+                                                    type="button">发送验证码</button>
+                                          </span>
+                                </div>
+                            </div>
+                            <button type="button" class="go-register btn btn--primary btn--block">立即注册</button>
+
+                        </form>
+                        <!-- form  end -->
                     </div>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal-dialog -->
     </div>
-    <!--侧边栏-->
-    <div class="off-canvas">
-        <div class="canvas-close"><i class="mdi mdi-close"></i></div>
-        <div class="logo-wrapper">
-            <a href="index.html">
-                <img class="logo regular" src="static/picture/logo.png" alt="流木领域">
-            </a>
-        </div>
-        <div class="mobile-menu hidden-lg hidden-xl"></div>
-        <aside class="widget-area">
-        </aside>
+    <!-- /.modal -->
+</div>
+<!--侧边栏-->
+<div class="off-canvas">
+    <div class="canvas-close"><i class="mdi mdi-close"></i></div>
+    <div class="logo-wrapper">
+        <a href="index.html">
+            <img class="logo regular" src="static/picture/logo.png" alt="流木领域">
+        </a>
     </div>
-    <script type='text/javascript' src='static/js/sweetalert2.min-4.9.js'></script>
-    <script type='text/javascript' src='static/js/plugins-4.9.js'></script>
-    <script type='text/javascript' src='static/js/app-4.9.js'></script>
-    <script type='text/javascript' src='static/js/liumulingyu1.0.js'></script>
-    <link rel="stylesheet" type="text/css" rel="external nofollow" target="_blank" href="static/css/sweetalert.min.css">
-    <script src="static/js/sweetalert.min.js"></script>
-    <script>document.body.oncopy = function () {
-        swal("复制成功！", "转载请务必保留原文链接，申明来源，谢谢合作！！", "success");
-    };</script>
-    <script>
-        !function (e, t, a) {
-            function r() {
-                for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
-                requestAnimationFrame(r)
+    <div class="mobile-menu hidden-lg hidden-xl"></div>
+    <aside class="widget-area">
+    </aside>
+</div>
+<script type='text/javascript' src='static/js/sweetalert2.min-4.9.js'></script>
+<script type='text/javascript' src='static/js/plugins-4.9.js'></script>
+<script type='text/javascript' src='static/js/app-4.9.js'></script>
+<link rel="stylesheet" type="text/css" rel="external nofollow" target="_blank" href="static/css/sweetalert.min.css">
+<script src="static/js/sweetalert.min.js"></script>
+<script>document.body.oncopy = function () {
+    swal("复制成功！", "转载请务必保留原文链接，申明来源，谢谢合作！！", "success");
+};</script>
+<script>
+    !function (e, t, a) {
+        function r() {
+            for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+            requestAnimationFrame(r)
+        }
+
+        function n() {
+            var t = "function" == typeof e.onclick && e.onclick;
+            e.onclick = function (e) {
+                t && t(),
+                    o(e)
             }
+        }
 
-            function n() {
-                var t = "function" == typeof e.onclick && e.onclick;
-                e.onclick = function (e) {
-                    t && t(),
-                        o(e)
-                }
+        function o(e) {
+            var a = t.createElement("div");
+            a.className = "heart",
+                s.push({
+                    el: a,
+                    x: e.clientX - 5,
+                    y: e.clientY - 5,
+                    scale: 1,
+                    alpha: 1,
+                    color: c()
+                }),
+                t.body.appendChild(a)
+        }
+
+        function i(e) {
+            var a = t.createElement("style");
+            a.type = "text/css";
+            try {
+                a.appendChild(t.createTextNode(e))
+            } catch (t) {
+                a.styleSheet.cssText = e
             }
+            t.getElementsByTagName("head")[0].appendChild(a)
+        }
 
-            function o(e) {
-                var a = t.createElement("div");
-                a.className = "heart",
-                    s.push({
-                        el: a,
-                        x: e.clientX - 5,
-                        y: e.clientY - 5,
-                        scale: 1,
-                        alpha: 1,
-                        color: c()
-                    }),
-                    t.body.appendChild(a)
-            }
+        function c() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
 
-            function i(e) {
-                var a = t.createElement("style");
-                a.type = "text/css";
-                try {
-                    a.appendChild(t.createTextNode(e))
-                } catch (t) {
-                    a.styleSheet.cssText = e
-                }
-                t.getElementsByTagName("head")[0].appendChild(a)
-            }
-
-            function c() {
-                return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
-            }
-
-            var s = [];
-            e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame ||
-                function (e) {
-                    setTimeout(e, 1e3 / 60)
-                },
-                i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),
-                n(),
-                r()
-        }(window, document);
-    </script>
-    <script>
-        /*添加分类*/
-
-    </script>
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame ||
+            function (e) {
+                setTimeout(e, 1e3 / 60)
+            },
+            i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),
+            n(),
+            r()
+    }(window, document);
+</script>
+<script>
+    var token=sessionStorage.getItem("token");
+    if (token==null){
+        document.getElementById("login_text").innerText="登录";
+    }else{
+        document.getElementById("login_text").innerText="个人中心";
+    }
+</script>
 </div>
 </body>
+
 </html>
