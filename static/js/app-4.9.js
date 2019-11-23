@@ -1,6 +1,6 @@
 var host="http://47.106.187.85/"
 var testHost="http://localhost:8089/"
-var isdebug=false;//是否调试状态
+var isdebug=true;//是否调试状态
 if (isdebug){
     host=testHost;
 }
@@ -874,11 +874,11 @@ function getWechatList(type,user_id){
         },
     }).done(function(response) {
         if (response.meta.success){
-         feedList(response.data)
+         feedList(response.data,user_id)
         }
     });
 }
-function feedList(data) {
+function feedList(data,user_id) {
     var div=document.getElementById("feed-list");
     div.innerHTML="";
     for (i=0;i<data.length;i++){
@@ -895,7 +895,7 @@ function feedList(data) {
         a.setAttribute("href","#")
         img.setAttribute("class","lazyload");
         //http://localhost:63342/web/static/picture/user_wechat_qcode.jpg
-        img.setAttribute("data-src","static/picture/user_wechat_qcode.jpg");
+        img.setAttribute("data-src",data[i].qcode_url);
         img.setAttribute("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
         a.append(img)
         placeholder.append(a)
@@ -906,7 +906,7 @@ function feedList(data) {
         entryHeader.setAttribute("class","entry-header");
         var h2=document.createElement("h2");
         h2.setAttribute("class","entry-title");
-        h2.innerHTML="<a rel=\"bookmark\">"+data[i].describe+"</a>";
+        h2.innerHTML="<a rel=\"bookmark\">"+data[i].title+"</a>";
         var entry_meta=document.createElement("div");
         entry_meta.setAttribute("class","entry-meta");
         var text="微信群"
@@ -920,9 +920,8 @@ function feedList(data) {
         entryHeader.append(h2);
 
         var entryExcerpt=document.createElement("div");
-        //entryExcerpt.setAttribute("style","margin-bottom: 2px;");
         entryExcerpt.innerHTML="  <div style=\"background: #0d95e8; margin-top: 10px;margin-bottom: 10px;border-radius:5px \">\n" +
-            "                                                <span ><h4 style=\"color: #FFFFFF;padding: 5px\">发布日期："+data[i].create_time+"</h4></span>\n" +
+            "                                                <span ><h4 style=\"color: #FFFFFF;padding: 5px\">发布日期："+data[i].create_time.slice(0, 10)+"</h4></span>\n" +
             "                                            </div>";
         entryWrapper.append(entryHeader)
         entryWrapper.append(entryExcerpt)

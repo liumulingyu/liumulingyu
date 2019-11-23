@@ -85,65 +85,40 @@
                 <div class="layui-tab-content" style="margin-top: 20px">
 
                     <div class="layui-tab-item layui-show">
-                        <p class="layui-elem-quote">图片地址请先上传到第三方获取二维码图片地址再上传</p>
+                        <p class="layui-elem-quote">禁止发布色情，赌博，红包的群二维码，所有发布的内容7天后自动删除，本站不保存任何信息。如果想进交流群，请添加微信liumulingyu或者直接扫描底部的二维码。
+                            另外，本站不提供图片上传服务，第三方免费上传图片网站<a href="https://imgbb.com/">点击上传https://imgbb.com</a></p>
                         <form class="layui-form layui-form-pane" action="">
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">城市选择</label>
-                                <div class="layui-input-inline">
-                                    <select name="quiz1">
-                                        <option value="">请选择省</option>
-                                        <option value="" selected="">浙江省</option>
-                                        <option value="">江西省</option>
-                                        <option value="">福建省</option>
-                                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择省" value="浙江省" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择省</dd><dd lay-value="浙江" class="layui-this">浙江省</dd><dd lay-value="你的工号" class="">江西省</dd><dd lay-value="你最喜欢的老师" class="">福建省</dd></dl></div>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="quiz2">
-                                        <option value="">请选择市</option>
-                                        <option value="杭州">杭州</option>
-                                        <option value="宁波" disabled="">宁波</option>
-                                        <option value="温州">温州</option>
-                                        <option value="温州">台州</option>
-                                        <option value="温州">绍兴</option>
-                                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择市" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择市</dd><dd lay-value="杭州" class="">杭州</dd><dd lay-value="宁波" class=" layui-disabled">宁波</dd><dd lay-value="温州" class="">温州</dd><dd lay-value="温州" class="">台州</dd><dd lay-value="温州" class="">绍兴</dd></dl></div>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="quiz3">
-                                        <option value="">请选择县/区</option>
-                                        <option value="西湖区">西湖区</option>
-                                        <option value="余杭区">余杭区</option>
-                                        <option value="拱墅区">临安市</option>
-                                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择县/区" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择县/区</dd><dd lay-value="西湖区" class="">西湖区</dd><dd lay-value="余杭区" class="">余杭区</dd><dd lay-value="拱墅区" class="">临安市</dd></dl></div>
-                                </div>
-                            </div>
+
                             <div class="layui-form-item" pane="">
                                 <label class="layui-form-label">类别</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="wechat" value="微信群大全" title="微信群大全" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>男</div></div>
-                                    <input type="radio" name="gongzhonghao" value="公众号互关" title="公众号互关"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>女</div></div>
+                                    <input type="radio" name="wx_type" id="radio_wx" lay-verify="radio_v" value="0" title="微信群大全" >
+                                    <div class="layui-unselect layui-form-radio layui-form-radioed">
+                                    <i class="layui-anim layui-icon"></i><div>微信群大全</div></div>
+                                    <input type="radio" name="wx_type" id="radio_gzh" lay-verify="radio_v" value="1" title="公众号互关">
+                                    <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>公众号互关</div></div>
                                 </div>
                             </div>
-
                             <div class="layui-form-item">
                                 <label class="layui-form-label">图片地址</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="title" autocomplete="off" placeholder="请输入图片地址" class="layui-input">
+                                    <input type="text" id="qcode_url" name="qcode_url" onpropertychange="OnPropChanged (event)" lay-verify="qcode_image" autocomplete="off" placeholder="图片地址请先上传到第三方获取二维码图片地址再粘贴到这个框里进行发布" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">标题</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                                    <input type="text" lay-verify="title" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item layui-form-text">
                                 <div class="layui-input-block">
-                                    <textarea placeholder="简单的介绍一下" class="layui-textarea"></textarea>
+                                    <textarea placeholder="简单的介绍一下" name="describe" lay-verify="text" class="layui-textarea"></textarea>
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
-                                <button class="layui-btn" lay-submit="" lay-filter="demo2">发布   </button>
+                                <button class="layui-btn" lay-submit="release" lay-filter="release">发布</button>
                             </div>
                         </form>
                     </div>
@@ -312,16 +287,74 @@
     }
     jifen.innerText="积分："+sessionStorage.getItem("userIntegral");
     termTile.innerText="涉及到法律法规，存在损害国家利益、破坏民族团结、扰乱社会秩序，散步淫秽、色情、赌博、暴力、或侵犯他人合法权益的争议内容，将不予通过";
-
-    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element'], function() {
-        var laydate = layui.laydate //日期
-            ,laypage = layui.laypage //分页
-            ,layer = layui.layer //弹层
-            ,table = layui.table //表格
-            ,carousel = layui.carousel //轮播
-            ,upload = layui.upload //上传
-            ,element = layui.element; //元素操作 等等...
-
+    $('input').on('input propertychange', function() {
+        if (this.id=="qcode_url"){
+            validateImage(this.value);
+        }
     });
+    layui.use(['form'], function() {
+        var form = layui.form
+        form.verify({
+            radio_v:function(value){
+              if (!document.getElementById("radio_wx").checked&&!document.getElementById("radio_gzh").checked){
+                  return '请选择发布的类别';
+              }
+            },
+            qcode_image:function (value) {
+                if (value.length<1){
+                    return '请输入图片地址';
+                }
+                if(!validateImage(value)){
+
+                    return '请输入正确的图片地址';
+                }
+
+            },
+            title: function(value){
+                if(value.length < 1){
+                    return '请输入标题';
+                }
+            }
+            ,text: function(value){
+                if (value.length<1){
+                    return '请输入简单介绍';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(release)', function(data){
+            data.field["create_user_id"]=sessionStorage.getItem("token");
+            data.field["create_name"]=sessionStorage.getItem("userName");
+            $.ajax({
+                url: host+"wechat/releaseWechatQcode",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data:JSON.stringify(data.field),
+            }).done(function(response) {
+                if (response.meta.success){
+                    layer.msg(response.data,{time:1000}, function () {
+                        self.location="index.html";
+                    });
+                }else{
+                    layer.msg(response.meta.message,{time:1000}, function () {
+                    });
+                }
+            });
+            return false;
+        });
+    });
+    //判断链接是否存在
+       function validateImage(pathImg) {
+        var ImgObj = new Image();
+        ImgObj.src = pathImg;
+        var result=false;
+           if( ImgObj.fileSize > 0 || ( ImgObj.width > 0 &&  ImgObj.height > 0)) {
+               result= true;
+        } else {
+               result= false;
+        }
+        return result;
+    }
 </script>
 </html>
