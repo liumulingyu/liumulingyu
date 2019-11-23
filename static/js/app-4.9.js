@@ -168,20 +168,14 @@ function signup_popup(){
     var _this = $(this)
     var deft = _this.text()
     var user_name = $("input[name='user_name']").val();
-    var user_email = $("input[name='user_email']").val();
     var user_pass = $("input[name='user_pass']").val();
     var user_pass2 = $("input[name='user_pass2']").val();
     var captcha = $("input[name='captcha']").val();
+
     _this.html(iconspin+deft)
     // 验证用户名
     if( !is_check_name(user_name) ){
       _this.html(iconwarning+'用户名格式错误')
-      setTimeout(function(){_this.html(deft)},2000)
-      return false;
-    }
-    //验证邮箱
-    if( !is_check_mail(user_email) ){
-      _this.html(iconwarning+'邮箱格式错误')
       setTimeout(function(){_this.html(deft)},2000)
       return false;
     }
@@ -190,19 +184,25 @@ function signup_popup(){
       setTimeout(function(){_this.html(deft)},2000)
       return false;
     }
+    if (captcha==null||captcha==""){
+        _this.html(iconwarning+'请输入微信验证码')
+        setTimeout(function(){_this.html(deft)},2000)
+        return false;
+    }
     // 验证OK
-    $.post(caozhuti.ajaxurl, {
-        "action": "user_register",
+    $.post(host+"user/register", {
         "user_name": user_name,
-        "user_email": user_email,
-        "user_pass": user_pass,
-        "captcha": captcha,
+        "user_pwd": user_pass,
+        "code": captcha,
     }, function(data) {
-        if (data.status == 1) {
-          _this.html(iconcheck+data.msg)
-          setTimeout(function(){location.reload()},1000)
+        if (data.meta.success) {
+           _this.html(iconcheck+data.meta.message)
+            sessionStorage.setItem("token",data.data.token);
+            sessionStorage.setItem("userName",data.data.userName);
+            sessionStorage.setItem("userIntegral",data.data.userIntegral);
+           setTimeout(function(){location.reload()},1000)
         }else{
-          _this.html(iconwarning+data.msg)
+          _this.html(iconwarning+data.meta.message)
           setTimeout(function(){_this.html(deft)},2000)
         }
     });
@@ -382,37 +382,8 @@ function userinit() {
 
     // 发送验证码 注册
     $(document).on('click', ".go-captcha_email", function (event) {
-        var _this = $(this)
-        var deft = _this.text()
-        var user_email = $("input[name='user_email']").val()
-        _this.html(iconspin + deft)
-        _this.attr("disabled", "true");
-        //验证邮箱
-        if (!is_check_mail(user_email)) {
-            _this.html(iconwarning + '邮箱错误')
-            setTimeout(function () {
-                _this.html(deft)
-                _this.removeAttr("disabled")
-            }, 3000)
-            return false;
-        }
-        $.post(caozhuti.ajaxurl, {
-            "action": "captcha_email",
-            "user_email": user_email
-        }, function (data) {
-            if (data.status == 1) {
-                _this.html(iconcheck + '发送成功')
-                setTimeout(function () {
-                    _this.html(deft)
-                }, 3000)
-            } else {
-                _this.html(iconwarning + data.msg)
-                setTimeout(function () {
-                    _this.html(deft)
-                    _this.removeAttr("disabled")
-                }, 3000)
-            }
-        });
+       /*获取微信验证码*/
+
     });
     //推广中心 复制按钮
     var btn = document.getElementById('refurl');

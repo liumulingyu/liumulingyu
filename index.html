@@ -225,23 +225,20 @@
                                 </div>
                                 <!-- .form-group end -->
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="user_email" placeholder="绑定邮箱">
-                                </div>
-                                <!-- .form-group end -->
-                                <div class="form-group">
                                     <input type="password" class="form-control" name="user_pass" placeholder="密码最小长度为6">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" name="user_pass2" placeholder="再次输入密码">
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="captcha" placeholder="邮箱验证码">
-                                        <span class="input-group-btn">
+                                <div class="widget--content " >
+                                    <img src="static/picture/wechat_qcode.jpg">
+                                </div>
+                                <span class="input-group-btn ">
                                             <button class="go-captcha_email btn btn--secondary"
-                                                    type="button">发送验证码</button>
+                                                    type="button">扫描二维码获取微信验证码</button>
                                           </span>
-                                    </div>
+                                <div class="form-group" style="margin-top: 20px">
+                                    <input type="text" class="form-control" name="captcha" placeholder="微信验证码">
                                 </div>
                                 <button type="button" class="go-register btn btn--primary btn--block">立即注册</button>
 
