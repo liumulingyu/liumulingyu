@@ -196,7 +196,7 @@ function signup_popup(){
         "code": captcha,
     }, function(data) {
         if (data.meta.success) {
-           _this.html(iconcheck+data.meta.message)
+           _this.html(iconcheck+data.data.message)
             sessionStorage.setItem("token",data.data.token);
             sessionStorage.setItem("userName",data.data.userName);
             sessionStorage.setItem("userIntegral",data.data.userIntegral);
