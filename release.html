@@ -83,12 +83,10 @@
                     <li>发布源码</li>
                 </ul>
                 <div class="layui-tab-content" style="margin-top: 20px">
-
                     <div class="layui-tab-item layui-show">
                         <p class="layui-elem-quote">禁止发布色情，赌博，红包的群二维码，所有发布的内容7天后自动删除，本站不保存任何信息。如果想进交流群，请添加微信liumulingyu或者直接扫描底部的二维码。
-                            另外，本站不提供图片上传服务，第三方免费上传图片网站<a href="https://imgbb.com/">点击上传https://imgbb.com</a></p>
+                            </p>
                         <form class="layui-form layui-form-pane" action="">
-
                             <div class="layui-form-item" pane="">
                                 <label class="layui-form-label">类别</label>
                                 <div class="layui-input-block">
@@ -100,9 +98,11 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">图片地址</label>
+                                <button type="button" class="layui-form-label"  id="upload_image">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
                                 <div class="layui-input-block">
-                                    <input type="text" id="qcode_url" name="qcode_url" onpropertychange="OnPropChanged (event)" lay-verify="qcode_image" autocomplete="off" placeholder="图片地址请先上传到第三方获取二维码图片地址再粘贴到这个框里进行发布" class="layui-input">
+                                    <input type="text" id="qcode_url" name="qcode_url" onpropertychange="OnPropChanged (event)" lay-verify="qcode_image" autocomplete="off" placeholder="点击左侧的上传图片按钮进行图片上传，也可直接复制其他网络图片地址到输入框" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -292,8 +292,25 @@
             validateImage(this.value);
         }
     });
-    layui.use(['form'], function() {
+    var imageInfo;
+    layui.use(['form','upload'], function() {
         var form = layui.form
+        var upload = layui.upload
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#upload_image' //绑定元素
+            ,url: 'http://up.imgapi.com/' //上传接口
+            ,data: {Token:"15fd856f9b63a096832685c653708a53311cd412:gM3pTSGRTssOv-gTReDK08-tf2w=:eyJkZWFkbGluZSI6MTU3NDU3OTY1NSwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNzA0Mzg2IiwiYWlkIjoiMTY0NzU2NCIsImZyb20iOiJmaWxlIn0="}
+            ,done: function(res){
+                //上传完毕回调qcode_url
+                imageInfo=res;
+                document.getElementById("qcode_url").value=res.linkurl;
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    //表单验证
         form.verify({
             radio_v:function(value){
               if (!document.getElementById("radio_wx").checked&&!document.getElementById("radio_gzh").checked){
@@ -304,8 +321,7 @@
                 if (value.length<1){
                     return '请输入图片地址';
                 }
-                if(!validateImage(value)){
-
+                if(!validateImage(value)&&imageInfo==null){
                     return '请输入正确的图片地址';
                 }
 
@@ -325,6 +341,9 @@
         form.on('submit(release)', function(data){
             data.field["create_user_id"]=sessionStorage.getItem("token");
             data.field["create_name"]=sessionStorage.getItem("userName");
+            data.field["height"]=imageInfo.height;
+            data.field["width"]=imageInfo.width;
+            data.field["size"]=imageInfo.size;
             $.ajax({
                 url: host+"wechat/releaseWechatQcode",
                 type: 'POST',
