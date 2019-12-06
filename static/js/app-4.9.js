@@ -865,7 +865,6 @@ function feedList(data,user_id) {
         var a=document.createElement("a");
         a.setAttribute("href","#")
         img.setAttribute("class","lazyload");
-        //http://localhost:63342/web/static/picture/user_wechat_qcode.jpg
         img.setAttribute("data-src",data[i].qcode_url);
         img.setAttribute("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
         a.append(img)
